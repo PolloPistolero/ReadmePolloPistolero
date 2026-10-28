@@ -565,7 +565,6 @@ try{history.scrollRestoration='manual'}catch(e){}try{scrollTo(0,0)}catch(e){}add
     <canvas class="dotsc" id="dotsc" aria-hidden="true"></canvas>
     <canvas id="reveal" role="img" aria-label="Marc Westhoff im Tweed-Sakko. Das Foto wird unter dem Cursor scharf."></canvas>
   </div>
-  <div class="hold-hint" id="hold-hint" aria-hidden="true"><span data-de="Gedrückt halten: mehr über mich" data-en="Press and hold: more about me">Gedrückt halten: mehr über mich</span></div>
   <div class="hold-demo" id="hold-demo" aria-hidden="true"><svg viewBox="0 0 48 48"><circle class="hd-bg" cx="24" cy="24" r="20"/><circle class="hd-pr" cx="24" cy="24" r="20" pathLength="100"/></svg><i></i></div>
   <div class="hero-name" aria-hidden="true">Marc Westhoff</div>
   <h2 class="sr">Marc Westhoff</h2>
@@ -1058,7 +1057,7 @@ const cards=[],tiles=[];
 PROJ.forEach((p,i)=>{
   const c=document.createElement('div');c.className='pcard';c.style.setProperty('--ar',p.w+'/'+p.h);c.style.setProperty('--arn',(p.w/p.h).toFixed(3));c.dataset.i=i;c.style.setProperty('--fy',(FY[p.k]*100)+'%');
   c.setAttribute('role','button');c.tabIndex=-1;
-  c.innerHTML='<img class="st" src="assets/d-'+p.k+'.png'+(AV(p.k)||'?v=5')+'" alt="" draggable="false"><canvas></canvas><span class="lens"></span><span class="chint"></span>';
+  c.innerHTML='<img class="st" src="assets/d-'+p.k+'.png'+(AV(p.k)||'?v=5')+'" alt="" draggable="false"><canvas></canvas><span class="lens"></span>';
   pstage.appendChild(c);cards.push(c);
   const t=document.createElement('div');t.className='ptile';t.innerHTML='<img class="lg" src="'+LOGO[p.k]+'" alt="" draggable="false">';pstage.appendChild(t);tiles.push(t);
 });
@@ -1448,7 +1447,7 @@ addEventListener('pointerup',e=>{if(!dmode)return;const dx=e.clientX-dsx,v=Math.
 addEventListener('pointercancel',()=>{if(dmode){dmode=0;drg=false;pstage.classList.remove('drag');pstage.style.setProperty('--dx','0px');bgDrag(0)}});
 const hintT=()=>pinFree?{de:'( Pfeile oder Wischen blättert, tippen deckt auf )',en:'( Arrows or swipe to browse, tap reveals )',es:'( Flechas o deslizar para avanzar, tocar descubre )'}[L()]:(fine?{de:'( Scrollen blättert, Maus deckt auf )',en:'( Scroll to browse, mouse reveals )',es:'( Desplázate para avanzar, el ratón descubre )'}:{de:'( Scrollen oder wischen, tippen deckt auf )',en:'( Scroll or swipe, tap reveals )',es:'( Desplázate o desliza, tocar descubre )'})[L()];
 const chT=()=>(fine?{de:'Klick: aufdecken · Hover: freilegen',en:'Click: reveal · Hover: uncover',es:'Clic: descubrir · Ratón: destapar'}:{de:'Tippen: aufdecken',en:'Tap: reveal',es:'Tocar: descubrir'})[L()];
-function modeUI(){$('p-hint').textContent=hintT();cards.forEach(c=>{const h=c.querySelector('.chint');if(h)h.textContent=chT()})}
+function modeUI(){$('p-hint').textContent=hintT();}
 /* Vorgemachte Geste: zeigt einmal, wie man die Kachel aufdeckt */
 {let used=false,ran=0,alive=false;
  pstage.addEventListener('pointerdown',()=>{used=true},true);cards.forEach(c=>c.addEventListener('pointermove',e=>{if(e.pointerType==='mouse')used=true}));
