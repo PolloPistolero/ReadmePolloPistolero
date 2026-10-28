@@ -493,10 +493,11 @@ footer a:hover{color:var(--fg)}
 .menu .m-f{transform:translateY(20px);opacity:0;transition:transform .8s cubic-bezier(.22,1,.36,1) .3s,opacity .6s .3s}.menu.on .m-f{transform:none;opacity:1}
 @media(max-width:760px){.m-n{margin-top:6px}.m-l::after{display:none}}
 #m-game{position:relative;isolation:isolate}#m-game::before{content:"";position:absolute;left:8%;right:-2%;top:8%;bottom:8%;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 50% 55%,rgba(160,74,248,.20),rgba(160,74,248,.07) 55%,transparent 75%)}
-#m-game>span:last-child,#h-me{animation:mgs 5s ease-in-out infinite;padding-right:.1em}
+#m-game>span:last-child,#shoot>span{animation:mgs 5s ease-in-out infinite}#shoot{animation:mgp 5s ease-in-out infinite}
+@keyframes mgp{0%,100%{box-shadow:0 0 0 rgba(160,74,248,0)}50%{box-shadow:0 0 22px rgba(160,74,248,.35)}}
 @keyframes mgs{0%,100%{color:var(--fg);text-shadow:0 0 0 rgba(160,74,248,0)}50%{color:#e3d4ff;text-shadow:0 0 18px rgba(160,74,248,.55),0 0 2px rgba(190,140,255,.35)}}
 #m-game:hover>span:last-child,#m-game:focus-visible>span:last-child{color:var(--acc);text-shadow:none;animation:none}
-@media(prefers-reduced-motion:reduce){#m-game>span:last-child,#h-me{animation:none}}
+@media(prefers-reduced-motion:reduce){#m-game>span:last-child,#shoot,#shoot>span{animation:none}}
 .m-f{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
 .prog{position:fixed;left:0;right:0;top:0;height:2px;z-index:60;pointer-events:none}.prog i{display:block;height:100%;background:var(--acc);transform-origin:left;transform:scaleX(0)}
 .rail{position:fixed;right:max(10px,calc(var(--gut) / 2 - 6px));top:50%;transform:translateY(-50%);z-index:40;display:grid;gap:14px;justify-items:end}
@@ -733,8 +734,8 @@ const burst=()=>{const r=st.getBoundingClientRect(),cv=[...st.querySelectorAll('
  const f=document.createElement('canvas');f.style.cssText='position:fixed;inset:0;width:100%;height:100%;z-index:99;pointer-events:none';const DPR=Math.min(devicePixelRatio||1,2);f.width=innerWidth*DPR;f.height=innerHeight*DPR;document.body.appendChild(f);const g=f.getContext('2d');g.scale(DPR,DPR);
  const Q=[],cx=r.left+r.width/2,cy=r.top+r.height*.45,k=r.width/w;
  for(let yy=0;yy<h;yy+=3)for(let xx=0;xx<w;xx+=3){if(dd[(yy*w+xx)*4+3]<40)continue;const px=r.left+xx*k,py=r.top+yy*k;Q.push([px,py])}
- const N=Math.min(T.length,Math.max(2500,Math.min(Q.length,T.length))),P=[];
- for(let i=0;i<N;i++){const q=Q[(Math.random()*Q.length)|0]||[cx,cy],tg=T[i],ang=Math.atan2(q[1]-cy,q[0]-cx)+(Math.random()-.5)*.7,sp=3+Math.random()*13+Math.hypot(q[0]-cx,q[1]-cy)*.018;
+ const N=T.length,P=[];
+ for(let i=0;i<N;i++){const q0=Q[(Math.random()*Q.length)|0]||[cx,cy],q=[q0[0]+(Math.random()-.5)*6,q0[1]+(Math.random()-.5)*6],tg=T[i],ang=Math.atan2(q[1]-cy,q[0]-cx)+(Math.random()-.5)*.7,sp=3+Math.random()*13+Math.hypot(q[0]-cx,q[1]-cy)*.018;
   P.push({x:q[0],y:q[1],vx:Math.cos(ang)*sp,vy:Math.sin(ang)*sp-1.5,u:tg[0],v:tg[1],d:Math.random()*.35,sx:0,sy:0,r:1.2+Math.random()*1.6})}
  for(let i=P.length-1;i>0;i--){const j=(Math.random()*(i+1))|0,a=P[i].u,b=P[i].v;P[i].u=P[j].u;P[i].v=P[j].v;P[j].u=a;P[j].v=b}
  const BT=800,CT=1500,t0=performance.now();let conv=0;

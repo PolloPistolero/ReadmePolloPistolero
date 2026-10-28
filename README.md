@@ -1,11 +1,4 @@
 # marcwesthoff.com
 
-Handgebaute statische Seite (Cloudflare Pages).
-
-- `dist/` ist die fertige Website (wird so ausgeliefert, kein Build-Schritt nötig)
-- `functions/api/` sind die Server-Funktionen: `contact.js` (Kontaktformular über Formspree) und `highscore.js` (anonymer Highscore, braucht den KV-Speicher `SCORES`)
-- `source/` enthält die Quelldatei (`preview.html`) und das Build-Skript
-
-## Cloudflare Pages
-Framework: keins. Build-Befehl: leer. Ausgabeordner: `dist`.
-Einstellungen > Functions > KV-Namespace-Bindings: Variable `SCORES` mit einem KV-Namespace verbinden.
+Statische Seite in `dist/` plus ein Cloudflare Worker (`worker.js`) fuer `/api/contact` (Formspree) und `/api/highscore` (KV `SCORES`).
+Deploy: `npx wrangler deploy` (Konfiguration in `wrangler.jsonc`). Quelle der Seite: `source/preview.html`, Build: `python3 source/tools/build_live.py`.
