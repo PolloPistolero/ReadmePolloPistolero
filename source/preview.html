@@ -212,7 +212,7 @@ section{padding:clamp(72px,10vw,140px) var(--gut)}
 .ab-ph{position:relative;width:100%;max-width:420px;aspect-ratio:556/989;overflow:hidden;cursor:crosshair;touch-action:pan-y;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
 .ab-ph .st{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block;opacity:.88;-webkit-user-drag:none}
 .ab-real{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;pointer-events:none;-webkit-mask-image:radial-gradient(circle 130px at var(--mx,50%) var(--my,30%),#000 35%,transparent 75%);mask-image:radial-gradient(circle 130px at var(--mx,50%) var(--my,30%),#000 35%,transparent 75%);transition:opacity .3s}
-.ab-ph.rv .ab-real{opacity:1}
+.ab-ph.hov .ab-real{opacity:1}
 .js .ab-ph.dth .st,.js .ab-ph.dth .ab-real{opacity:0}
 .ab-l{color:var(--fg-dim);margin-bottom:16px}
 .ab-tx h2{font-size:clamp(40px,6vw,84px);letter-spacing:-.05em;line-height:.95;margin-bottom:20px}
@@ -710,8 +710,8 @@ try{history.scrollRestoration='manual'}catch(e){}try{scrollTo(0,0)}catch(e){}add
 </footer>
 <script>
 (()=>{const ab=document.getElementById('ab-ph');if(ab){const set=e=>{const r=ab.getBoundingClientRect();ab.style.setProperty('--mx',(e.clientX-r.left)+'px');ab.style.setProperty('--my',(e.clientY-r.top)+'px')};
-ab.addEventListener('pointerenter',e=>{set(e);ab.classList.add('rv')});ab.addEventListener('pointermove',set);ab.addEventListener('pointerleave',()=>ab.classList.remove('rv'));
-ab.addEventListener('pointerdown',e=>{set(e);ab.classList.add('rv')});ab.addEventListener('pointerup',e=>{if(e.pointerType!=='mouse')setTimeout(()=>ab.classList.remove('rv'),1400)})}
+ab.addEventListener('pointerenter',e=>{set(e);ab.classList.add('hov')});ab.addEventListener('pointermove',set);ab.addEventListener('pointerleave',()=>ab.classList.remove('hov'));
+ab.addEventListener('pointerdown',e=>{set(e);ab.classList.add('hov')});ab.addEventListener('pointerup',e=>{if(e.pointerType!=='mouse')setTimeout(()=>ab.classList.remove('hov'),1400)})}
 const st=document.querySelector('.stage');if(!st)return;let tm=0,sx=0,sy=0,live=false,busy=false;
 const stop=()=>{clearTimeout(tm);live=false;if(!busy)st.classList.remove('holding')};
 const burst=()=>{const r=st.getBoundingClientRect(),cv=[...st.querySelectorAll('canvas')],ab=document.getElementById('ab-ph'),im=ab&&ab.querySelector('.st');if(!cv.length||!r.width||!im||!im.complete||!im.naturalWidth)return 0;
