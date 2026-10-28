@@ -74,6 +74,10 @@ h1,h2,h3{font-family:var(--head);font-weight:800;letter-spacing:-.03em;line-heig
 .hero-copy{position:absolute;left:var(--gut);top:92px;max-width:min(380px,44vw);z-index:4}
 .hero-copy h1{font-size:var(--t-sub);line-height:1.08;margin-bottom:14px}
 .hero-copy p{color:var(--fg-dim);font-size:var(--t-body);margin-bottom:22px;max-width:34ch}
+.hold-hint{position:absolute;z-index:3;left:50%;top:calc(56px + (100% - 56px - 3.5vw)*.1 + (100% - 56px - 3.5vw)*.9*.72);transform:translateX(-50%);display:inline-flex;align-items:center;gap:9px;padding:9px 15px;border-radius:999px;background:rgba(10,10,10,.8);border:1px solid rgba(255,255,255,.22);font-size:11px;letter-spacing:.09em;text-transform:uppercase;font-weight:700;white-space:nowrap;pointer-events:none;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);animation:chp 2.6s ease-in-out infinite;transition:opacity .3s}
+.hold-hint::before{content:"";width:9px;height:9px;border-radius:50%;border:2px solid #a04af8;box-shadow:0 0 8px #a04af8}
+.stage.holding~.hold-hint{opacity:0}
+@media(max-width:760px){.hold-hint{top:calc(215px + (100% - 215px - 20vw)*.1 + (100% - 215px - 20vw)*.9*.62)}}
 .stage{position:absolute;left:50%;top:calc(56px + (100% - 56px - 3.5vw)*.1);transform:translateX(-50%);height:calc((100% - 56px - 3.5vw)*.9);max-height:980px;aspect-ratio:684/1000;z-index:2;touch-action:pan-y}
 .stage canvas{position:absolute;inset:0;width:100%;height:100%}
 .stage .dotsc{position:absolute;inset:0;width:100%;height:100%}
@@ -111,6 +115,12 @@ section{padding:clamp(72px,10vw,140px) var(--gut)}
 .pcard{--base:translateY(-50%);left:7%;top:50%;width:min(36vw,calc(var(--sh) * .88 * var(--arn)));aspect-ratio:var(--ar);transform:var(--base) var(--t);border-radius:6px;background:#0a0a0a;box-shadow:0 30px 60px -20px rgba(0,0,0,.8),inset 0 0 0 1px rgba(237,240,242,.14);cursor:pointer;overflow:hidden;touch-action:pan-y}
 .pcard .st,.pcard canvas{position:absolute;inset:0;width:100%;height:100%;display:block;pointer-events:none}
 .pcard .st{opacity:.92;-webkit-user-drag:none}
+.chint{position:absolute;left:50%;bottom:12px;transform:translateX(-50%);z-index:5;pointer-events:none;display:none;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;background:rgba(10,10,10,.82);border:1px solid rgba(255,255,255,.22);color:#fff;font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;white-space:nowrap;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);animation:chp 2.6s ease-in-out infinite}
+.chint::before{content:"";width:7px;height:7px;border-radius:50%;background:#a04af8;box-shadow:0 0 8px #a04af8}
+.pcard.s0 .chint{display:inline-flex}.pcard.opn .chint{display:none}
+@media(hover:hover){.pcard.s0:hover .chint{opacity:0;animation:none}}
+@keyframes chp{0%,100%{box-shadow:0 0 0 rgba(160,74,248,0)}50%{box-shadow:0 0 16px rgba(160,74,248,.55)}}
+@media(prefers-reduced-motion:reduce){.chint{animation:none}}
 .pcard.s0{--t:perspective(1400px) rotateY(9deg) rotateX(2deg);opacity:1;z-index:3;pointer-events:auto}
 .pcard.sp{--t:translate(-30%,-88%) rotate(-17deg) scale(.5);opacity:.8;z-index:1;pointer-events:auto}
 .pcard.sn{--t:translate(-26%,92%) rotate(13deg) scale(.5);opacity:.8;z-index:1;pointer-events:auto}
@@ -125,7 +135,7 @@ section{padding:clamp(72px,10vw,140px) var(--gut)}
 .ptile.spp,.ptile.snn{--t:scale(.3);opacity:0}
 .ptext{position:absolute;left:46%;width:24%;top:50%;transform:translateY(-50%);text-align:center;z-index:4;display:flex;flex-direction:column;align-items:center;gap:14px}
 .ptext .no{font-size:var(--t-label);letter-spacing:.14em;color:var(--fg-dim);font-variant-numeric:tabular-nums}
-.ptext h3{font-size:clamp(28px,3.4vw,52px);min-height:1.05em;white-space:nowrap}
+.ptext h3{font-size:clamp(28px,3.4vw,52px);min-height:2.1em;line-height:1.04;white-space:normal;text-wrap:balance;display:flex;align-items:center;justify-content:center;max-width:100%}
 .ptext .tag{font-size:var(--t-label);letter-spacing:.12em;text-transform:uppercase;font-weight:600;border:1px solid var(--line);border-radius:999px;padding:3px 10px;color:var(--fg-dim)}
 .ptext p{color:var(--fg-dim);font-size:14px;max-width:30ch;min-height:4.2em}
 .ptext .pill{margin-top:4px}
@@ -148,7 +158,7 @@ section{padding:clamp(72px,10vw,140px) var(--gut)}
   .ptile.s0{--t:rotate(-5deg)}
   .ptile.sp,.ptile.sn,.ptile.spp,.ptile.snn{--t:scale(.4);opacity:0}
   .ptext{left:6%;width:88%;top:auto;bottom:7%;transform:none;gap:10px}
-  .ptext h3{font-size:clamp(28px,9vw,40px)}
+  .ptext h3{font-size:clamp(28px,9vw,40px);min-height:2.1em}
   .ptext p{min-height:0;font-size:14px}
 }
 .note{margin-top:22px;color:var(--fg-dim);font-size:14px;max-width:64ch}
@@ -216,7 +226,8 @@ section{padding:clamp(72px,10vw,140px) var(--gut)}
 .js .ab-ph.dth .st,.js .ab-ph.dth .ab-real{opacity:0}
 .ab-l{color:var(--fg-dim);margin-bottom:16px}
 .ab-tx h2{font-size:clamp(40px,6vw,84px);letter-spacing:-.05em;line-height:.95;margin-bottom:20px}
-.ab-p{font-size:clamp(18px,1.9vw,26px);line-height:1.35;max-width:30ch;margin:0}
+.ab-p{font-size:clamp(20px,2.2vw,32px);line-height:1.2;max-width:30ch;margin:0 0 12px;font-weight:600}
+.ab-p2{font-size:clamp(16px,1.5vw,20px);line-height:1.4;max-width:42ch;margin:0 0 4px;color:var(--fg-dim)}
 .ab-ch{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px;padding:0;list-style:none}
 .ab-ch li{border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-size:13px;color:var(--fg-dim)}
 .ab-hint{margin-top:14px;font-size:12px;color:var(--fg-dim);opacity:.7;letter-spacing:.06em}
@@ -543,6 +554,7 @@ try{history.scrollRestoration='manual'}catch(e){}try{scrollTo(0,0)}catch(e){}add
     <canvas class="dotsc" id="dotsc" aria-hidden="true"></canvas>
     <canvas id="reveal" role="img" aria-label="Marc Westhoff im Tweed-Sakko. Das Foto wird unter dem Cursor scharf."></canvas>
   </div>
+  <div class="hold-hint" id="hold-hint" aria-hidden="true"><span data-de="Gedrückt halten: mehr über mich" data-en="Press and hold: more about me">Gedrückt halten: mehr über mich</span></div>
   <div class="hero-name" aria-hidden="true">Marc Westhoff</div>
   <h2 class="sr">Marc Westhoff</h2>
   <div class="hero-foot label"><span data-de="( Marketing und Brand Building für Gründer )" data-en="( Marketing and brand building for founders )">( Marketing und Brand Building für Gründer )</span><span data-de="( Scrollen )" data-en="( Scroll )">( Scrollen )</span></div>
@@ -646,7 +658,8 @@ try{history.scrollRestoration='manual'}catch(e){}try{scrollTo(0,0)}catch(e){}add
     <div class="ab-tx">
       <div class="label ab-l" data-de="( Über mich )" data-en="( About me )">( Über mich )</div>
       <h2 id="ab-h">Marc Westhoff</h2>
-      <p class="ab-p" data-de="Ich mag Marketing, Strategie und Hands-on. Ich gründe und verbinde Kreativität mit akademischen Konzepten." data-en="I like marketing, strategy and getting hands-on. I found companies and connect creativity with academic concepts.">Ich mag Marketing, Strategie und Hands-on. Ich gründe und verbinde Kreativität mit akademischen Konzepten.</p>
+      <p class="ab-p" data-de="Marketing. Strategie. Action." data-en="Marketing. Strategy. Action.">Marketing. Strategie. Action.</p>
+      <p class="ab-p2" data-de="Ich gründe und verbinde Kreativität mit akademischen Konzepten und baue Marken." data-en="I found companies, combine creativity with academic concepts and build brands.">Ich gründe und verbinde Kreativität mit akademischen Konzepten und baue Marken.</p>
       <ul class="ab-ch">
         <li data-de="Master in Entrepreneurship, WHU" data-en="Master in Entrepreneurship, WHU">Master in Entrepreneurship, WHU</li>
         <li data-de="B.A. Marketing &amp; Digital Media" data-en="B.A. Marketing &amp; Digital Media">B.A. Marketing &amp; Digital Media</li>
@@ -787,6 +800,10 @@ const fine=matchMedia('(hover:hover) and (pointer:fine)').matches;
 /* Sprache */
 const html=document.documentElement;
 const ES={
+"Marketing. Strategie. Action.":"Marketing. Estrategia. Acción.",
+"Ich gründe und verbinde Kreativität mit akademischen Konzepten und baue Marken.":"Fundo empresas, uno creatividad con conceptos académicos y construyo marcas.",
+"Gedrückt halten: mehr über mich":"Mantén pulsado: más sobre mí",
+
 "Ich mag Marketing, Strategie und Hands-on. Ich gründe und verbinde Kreativität mit akademischen Konzepten.":"Me gustan el marketing, la estrategia y ponerme manos a la obra. Fundo empresas y combino creatividad con conceptos académicos.",
 "B.A. Marketing & Digital Media":"Grado en Marketing y Medios Digitales",
 "Gründer, SoMe Plans":"Fundador, SoMe Plans",
@@ -1011,11 +1028,11 @@ let userMoved=false;hero.addEventListener('pointermove',()=>{userMoved=true},{on
 const PROJ=[
  {k:'barbershop',n:5,w:760,h:427,t:1,de:['Barbershop Produktmarke','Realprojekt','Die Produktmarke eines Barbershops: Strategie, Tonalität, Claim, Content und Videos für den Online-Shop.'],en:['Barbershop product brand','Real project','The product brand of a barbershop: strategy, tone, claim, content and videos for the online shop.']},
  {k:'express',n:5,w:760,h:477,t:1,de:['Orhan’s Barbershop','Realprojekt','Zwei Gewinnspiele, Postings und Videos von Haarschnitten für einen Barbershop.'],en:['Orhan’s Barbershop','Real project','Two giveaways, posts and haircut videos for a barbershop.']},
- {k:'coffee',n:5,w:537,h:760,t:1,de:['Coffeebeans','Pitch','Markenentwurf für eine Rösterei. Der Kunde hat ihn nicht genutzt.'],en:['Coffeebeans','Pitch','Brand concept for a roastery. The client did not use it.']},
+ {k:'coffee',n:5,w:760,h:315,t:1,de:['Coffeebeans','Pitch','Markenentwurf für eine Rösterei. Der Kunde hat ihn nicht genutzt.'],en:['Coffeebeans','Pitch','Brand concept for a roastery. The client did not use it.']},
  {k:'caseflow',n:2,w:760,h:427,t:1,de:['CaseFlow','Eigenes Konzept','Konzept und Markenentwicklung. Grow the flow.'],en:['CaseFlow','Own concept','Concept and brand development. Grow the flow.']},
  {k:'burger',n:6,w:608,h:760,t:1,de:['Beef&Co','Realprojekt','Social Media und Content für einen Burger-Laden.'],en:['Beef&Co','Real project','Social media and content for a burger restaurant.']},
  {k:'doener',n:9,w:760,h:760,t:1,de:['Döner&Co','Realprojekt','Die gesamte Marke aufgebaut: Food-Konzept, Strategie, Corporate Identity und Design. Dazu OOH-Kampagne und Menüboard.'],en:['Döner&Co','Real project','The entire brand built from scratch: food concept, strategy, corporate identity and design. Plus OOH campaign and menu board.']},
- {k:'mix',n:8,w:760,h:760,t:1,de:['Projekte-Mix','Realprojekte','Inkasso, Nachhilfe und Gastro. Drei Branchen, drei Tonalitäten.'],en:['Project mix','Real projects','Debt collection, tutoring and hospitality. Three industries, three tones.']},
+ {k:'mix',n:8,w:608,h:760,t:1,de:['Projekte-Mix','Realprojekte','Inkasso, Nachhilfe und Gastro. Drei Branchen, drei Tonalitäten.'],en:['Project mix','Real projects','Debt collection, tutoring and hospitality. Three industries, three tones.']},
  {k:'felazio',n:5,w:760,h:760,t:1,de:['RF Felazio Koma 19','Eigenes Projekt','Sponsoring, Corporate Identity, Trikots und App-Prototyp. Das Gold-Trikot ist eine Darstellung.'],en:['RF Felazio Koma 19','Own project','Sponsoring, corporate identity, kits and app prototype. The gold kit is an illustration.']}
 ];
 const ESP={barbershop:['Marca de producto de barbería','Proyecto real','La marca de producto de una barbería: estrategia, tono, claim, contenido y vídeos para la tienda online.'],express:['Orhan’s Barbershop','Proyecto real','Dos sorteos, publicaciones y vídeos de cortes de pelo para una barbería.'],coffee:['Coffeebeans','Pitch','Concepto de marca para una tostaduría. El cliente no lo utilizó.'],caseflow:['CaseFlow','Concepto propio','Concepto y desarrollo de marca. Grow the flow.'],burger:['Beef&Co','Proyecto real','Redes sociales y contenido para una hamburguesería.'],doener:['Döner&Co','Proyecto real','Toda la marca construida desde cero: concepto gastronómico, estrategia, identidad corporativa y diseño. Además, campaña OOH y menú digital.'],mix:['Mezcla de proyectos','Proyectos reales','Cobro de deudas, clases particulares y gastronomía. Tres sectores, tres tonos.'],felazio:['RF Felazio Koma 19','Proyecto propio','Patrocinio, identidad corporativa, camisetas y prototipo de app. La camiseta dorada es una ilustración.']};
@@ -1023,18 +1040,18 @@ PROJ.forEach(p=>{p.es=ESP[p.k]});
 const L=()=>{const l=document.documentElement.lang;return l==='en'||l==='es'?l:'de'};
 const pstage=document.getElementById('pstage');let pi=0;
 const FY={barbershop:.5,express:.5,coffee:.3,caseflow:.5,burger:.5,doener:.5,mix:.5,felazio:.5};
-const AV=k=>(k==='caseflow'||k==='barbershop'||k==='express')?'?v=4':'';
+const AV=k=>(k==='caseflow'||k==='barbershop')?'?v=4':'';
 const LOGO={barbershop:'assets/l-barbershop.png',express:'assets/l-express.png',coffee:'assets/l-coffee.png',caseflow:'assets/l-caseflow.png',burger:'assets/l-burger.png',doener:'assets/l-doener.png',mix:'assets/l-mix.png',felazio:'assets/l-felazio-wappen.png'};
 const cards=[],tiles=[];
 PROJ.forEach((p,i)=>{
   const c=document.createElement('div');c.className='pcard';c.style.setProperty('--ar',p.w+'/'+p.h);c.style.setProperty('--arn',(p.w/p.h).toFixed(3));c.dataset.i=i;c.style.setProperty('--fy',(FY[p.k]*100)+'%');
   c.setAttribute('role','button');c.tabIndex=-1;
-  c.innerHTML='<img class="st" src="assets/d-'+p.k+'.png'+AV(p.k)+'" alt="" draggable="false"><canvas></canvas><span class="lens"></span>';
+  c.innerHTML='<img class="st" src="assets/d-'+p.k+'.png'+(AV(p.k)||'?v=5')+'" alt="" draggable="false"><canvas></canvas><span class="lens"></span><span class="chint"></span>';
   pstage.appendChild(c);cards.push(c);
   const t=document.createElement('div');t.className='ptile';t.innerHTML='<img class="lg" src="'+LOGO[p.k]+'" alt="" draggable="false">';pstage.appendChild(t);tiles.push(t);
 });
 /* Rubbel-Reveal pro Karte */
-const reals=PROJ.map(p=>{const im=new Image();im.src='assets/c-'+p.k+'.jpg'+AV(p.k);return im});
+const reals=PROJ.map(p=>{const im=new Image();im.src='assets/k-'+p.k+'.jpg';return im});
 const RV=cards.map((c,i)=>{
   const cv=c.querySelector('canvas'),cx=cv.getContext('2d'),m=document.createElement('canvas'),mx=m.getContext('2d');
   const o={c,cv,cx,m,mx,w:0,h:0,K:1,last:null,down:false,lastUp:0,running:false,touch:false,idle:true};
@@ -1053,8 +1070,8 @@ const RV=cards.map((c,i)=>{
     if(e.pointerType==='mouse'){o.touch=false;const r=Math.max(60,Math.min(100,o.w*.2));lens.style.setProperty('--lr',r*2+'px');lens.style.transform=`translate(${p.x}px,${p.y}px)`;o.stroke(p.x,p.y,r)}
     });
   o.bloom=(x,y)=>{o.size();o.touch=true;o.last=null;const t0=performance.now(),D=700,mr=Math.max(o.w,o.h)*.55;(function f(n){const k=Math.min(1,(n-t0)/D),e=1-Math.pow(1-k,3);o.last=null;o.dab(x,y,12+mr*e);o.lastUp=performance.now();o.kick();if(k<1)requestAnimationFrame(f)})(t0)};
-  o.open=(x,y)=>{o.size();o.sticky=false;o.touch=false;o.last=null;const t0=performance.now(),D=650,mr=Math.hypot(o.w,o.h);(function f(n){const k=Math.min(1,(n-t0)/D),e=1-Math.pow(1-k,3);o.last=null;o.dab(x,y,12+mr*e);o.render();if(k<1)requestAnimationFrame(f);else{o.sticky=true;o.render()}})(t0)};
-  o.close=()=>{if(!o.sticky)return;o.sticky=false;o.touch=false;o.lastUp=performance.now();o.kick()};
+  o.open=(x,y)=>{c.classList.add('opn');o.size();o.sticky=false;o.touch=false;o.last=null;const t0=performance.now(),D=650,mr=Math.hypot(o.w,o.h);(function f(n){const k=Math.min(1,(n-t0)/D),e=1-Math.pow(1-k,3);o.last=null;o.dab(x,y,12+mr*e);o.render();if(k<1)requestAnimationFrame(f);else{o.sticky=true;o.render()}})(t0)};
+  o.close=()=>{c.classList.remove('opn');if(!o.sticky)return;o.sticky=false;o.touch=false;o.lastUp=performance.now();o.kick()};
   c.addEventListener('pointerleave',e=>{if(e.pointerType==='mouse'){o.last=null;o.close()}});
   return o});
 reals.forEach((im,i)=>im.onload=()=>{RV[i].size();RV[i].render()});
@@ -1068,7 +1085,7 @@ function scramble(el,txt){const t0=performance.now(),D=520;clearInterval(el._s);
   el._s=setInterval(()=>{const k=Math.min(1,(performance.now()-t0)/D);let s='';for(let i=0;i<txt.length;i++){s+=(txt[i]===' '||i<k*txt.length*1.15)?txt[i]:rnd[Math.floor(Math.random()*rnd.length)]}el.textContent=s;if(k>=1){clearInterval(el._s);el.textContent=txt}},40)}
 function paint(first){
   const p=PROJ[pi],l=L();
-  PROJ.forEach((_,i)=>{let d=((i-pi)%PROJ.length+PROJ.length)%PROJ.length;if(d>PROJ.length/2)d-=PROJ.length;cards[i].className='pcard '+(d===0?'s0':d===-1?'sp':d===1?'sn':d<0?'spp':'snn');tiles[i].className='ptile '+(d===0?'s0':d===-1?'sp':d===1?'sn':d<0?'spp':'snn');cards[i].tabIndex=d===0?0:-1;
+  PROJ.forEach((_,i)=>{let d=((i-pi)%PROJ.length+PROJ.length)%PROJ.length;if(d>PROJ.length/2)d-=PROJ.length;cards[i].className='pcard '+(d===0?'s0':d===-1?'sp':d===1?'sn':d<0?'spp':'snn')+(RV&&RV[i]&&RV[i].sticky?' opn':'');tiles[i].className='ptile '+(d===0?'s0':d===-1?'sp':d===1?'sn':d<0?'spp':'snn');cards[i].tabIndex=d===0?0:-1;
     cards[i].setAttribute('aria-label',PROJ[i][l][0]+(d===0?'':'')) });
   $('p-no').textContent='№ '+String(pi+1).padStart(2,'0')+' / '+String(PROJ.length).padStart(2,'0');
   if(first)$('p-t').textContent=p[l][0];else scramble($('p-t'),p[l][0]);
@@ -1087,7 +1104,7 @@ addEventListener('scroll',()=>{if(!pinRaf)pinRaf=requestAnimationFrame(()=>{pinR
 addEventListener('resize',pinLayout);
 $('prev').onclick=()=>go(pi-1);$('next').onclick=()=>go(pi+1);
 let lastPT='mouse';addEventListener('pointerdown',e=>{lastPT=e.pointerType},true);
-cards.forEach((c,i)=>c.addEventListener('click',e=>{if(drg){return}if(i!==pi){go(i);return}if(lastPT==='mouse'){const r=c.getBoundingClientRect();if(RV[i].sticky)RV[i].close();else RV[i].open((e.clientX-r.left)*(c.offsetWidth/r.width),(e.clientY-r.top)*(c.offsetHeight/r.height))}else{const r=c.getBoundingClientRect();RV[i].bloom((e.clientX-r.left)*(c.offsetWidth/r.width),(e.clientY-r.top)*(c.offsetHeight/r.height))}}));
+cards.forEach((c,i)=>c.addEventListener('click',e=>{if(drg){return}if(i!==pi){go(i);return}if(true){const r=c.getBoundingClientRect();if(RV[i].sticky)RV[i].close();else RV[i].open((e.clientX-r.left)*(c.offsetWidth/r.width),(e.clientY-r.top)*(c.offsetHeight/r.height))}else{const r=c.getBoundingClientRect();RV[i].bloom((e.clientX-r.left)*(c.offsetWidth/r.width),(e.clientY-r.top)*(c.offsetHeight/r.height))}}));
 cards.forEach((c,i)=>c.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();if(i===pi)lbOpen(i,c)}}));
 const trx=$('tx'),txc=trx.getContext('2d'),pp=$('pp');let txd=[],txA=0,txBusy=false;
 function txInit(){const K=Math.min(devicePixelRatio||1,2),W=innerWidth,H=innerHeight;trx.width=W*K;trx.height=H*K;txc.setTransform(K,0,0,K,0,0);txd=[];const st=W<600?16:22;
@@ -1418,7 +1435,8 @@ addEventListener('pointerup',e=>{if(!dmode)return;const dx=e.clientX-dsx,v=Math.
   if(was){setTimeout(()=>{drg=false},60);if(Math.abs(dx)>70||v>.45&&Math.abs(dx)>25)go(pi+(dx<0?1:-1))}});
 addEventListener('pointercancel',()=>{if(dmode){dmode=0;drg=false;pstage.classList.remove('drag');pstage.style.setProperty('--dx','0px');bgDrag(0)}});
 const hintT=()=>pinFree?{de:'( Pfeile oder Wischen blättert, tippen deckt auf )',en:'( Arrows or swipe to browse, tap reveals )',es:'( Flechas o deslizar para avanzar, tocar descubre )'}[L()]:(fine?{de:'( Scrollen blättert, Maus deckt auf )',en:'( Scroll to browse, mouse reveals )',es:'( Desplázate para avanzar, el ratón descubre )'}:{de:'( Scrollen oder wischen, tippen deckt auf )',en:'( Scroll or swipe, tap reveals )',es:'( Desplázate o desliza, tocar descubre )'})[L()];
-function modeUI(){$('p-hint').textContent=hintT()}
+const chT=()=>(fine?{de:'Klick: aufdecken · Hover: freilegen',en:'Click: reveal · Hover: uncover',es:'Clic: descubrir · Ratón: destapar'}:{de:'Tippen: aufdecken',en:'Tap: reveal',es:'Tocar: descubrir'})[L()];
+function modeUI(){$('p-hint').textContent=hintT();cards.forEach(c=>{const h=c.querySelector('.chint');if(h)h.textContent=chT()})}
 modeUI();
 addEventListener('resize',()=>RV.forEach(o=>{o.w=0}));
 paint(true);pinLayout();setTimeout(()=>{pinLayout();onPinScroll()},400);
