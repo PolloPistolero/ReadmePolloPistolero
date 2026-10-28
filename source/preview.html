@@ -74,8 +74,8 @@ h1,h2,h3{font-family:var(--head);font-weight:800;letter-spacing:-.03em;line-heig
 .hero-copy{position:absolute;left:var(--gut);top:92px;max-width:min(380px,44vw);z-index:4}
 .hero-copy h1{font-size:var(--t-sub);line-height:1.08;margin-bottom:14px}
 .hero-copy p{color:var(--fg-dim);font-size:var(--t-body);margin-bottom:22px;max-width:34ch}
-.hold-hint{position:absolute;z-index:3;left:50%;top:calc(56px + (100% - 56px - 3.5vw)*.1 + (100% - 56px - 3.5vw)*.9*.72);transform:translateX(-50%);display:inline-flex;align-items:center;gap:9px;padding:9px 15px;border-radius:999px;background:rgba(10,10,10,.8);border:1px solid rgba(255,255,255,.22);font-size:11px;letter-spacing:.09em;text-transform:uppercase;font-weight:700;white-space:nowrap;pointer-events:none;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);animation:chp 2.6s ease-in-out infinite;transition:opacity .3s}
-.hold-hint::before{content:"";width:9px;height:9px;border-radius:50%;border:2px solid #a04af8;box-shadow:0 0 8px #a04af8}
+.hold-hint{position:absolute;z-index:3;left:50%;top:calc(56px + (100% - 56px - 3.5vw)*.1 + (100% - 56px - 3.5vw)*.9*.72);transform:translateX(-50%);display:inline-flex;align-items:center;gap:6px;padding:3px 8px;color:rgba(237,240,242,.55);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;white-space:nowrap;pointer-events:none;transition:opacity .4s}
+.hold-hint::before{content:"";width:6px;height:6px;border-radius:50%;border:1px solid rgba(237,240,242,.6)}
 .stage.holding~.hold-hint{opacity:0}
 @media(max-width:760px){.hold-hint{top:calc(215px + (100% - 215px - 20vw)*.1 + (100% - 215px - 20vw)*.9*.62)}}
 .stage{position:absolute;left:50%;top:calc(56px + (100% - 56px - 3.5vw)*.1);transform:translateX(-50%);height:calc((100% - 56px - 3.5vw)*.9);max-height:980px;aspect-ratio:684/1000;z-index:2;touch-action:pan-y}
@@ -115,12 +115,12 @@ section{padding:clamp(72px,10vw,140px) var(--gut)}
 .pcard{--base:translateY(-50%);left:7%;top:50%;width:min(36vw,calc(var(--sh) * .88 * var(--arn)));aspect-ratio:var(--ar);transform:var(--base) var(--t);border-radius:6px;background:#0a0a0a;box-shadow:0 30px 60px -20px rgba(0,0,0,.8),inset 0 0 0 1px rgba(237,240,242,.14);cursor:pointer;overflow:hidden;touch-action:pan-y}
 .pcard .st,.pcard canvas{position:absolute;inset:0;width:100%;height:100%;display:block;pointer-events:none}
 .pcard .st{opacity:.92;-webkit-user-drag:none}
-.chint{position:absolute;left:50%;bottom:12px;transform:translateX(-50%);z-index:5;pointer-events:none;display:none;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;background:rgba(10,10,10,.82);border:1px solid rgba(255,255,255,.22);color:#fff;font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;white-space:nowrap;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);animation:chp 2.6s ease-in-out infinite}
-.chint::before{content:"";width:7px;height:7px;border-radius:50%;background:#a04af8;box-shadow:0 0 8px #a04af8}
+.chint{position:absolute;left:50%;bottom:8px;transform:translateX(-50%);z-index:5;pointer-events:none;display:none;align-items:center;gap:6px;padding:4px 9px;border-radius:999px;background:rgba(10,10,10,.5);color:rgba(237,240,242,.72);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;white-space:nowrap;transition:opacity .3s}
+.chint::before{content:"";width:5px;height:5px;border-radius:50%;background:rgba(237,240,242,.7)}
 .pcard.s0 .chint{display:inline-flex}.pcard.opn .chint{display:none}
-@media(hover:hover){.pcard.s0:hover .chint{opacity:0;animation:none}}
+@media(hover:hover){.pcard.s0:hover .chint{opacity:0}}
 @keyframes chp{0%,100%{box-shadow:0 0 0 rgba(160,74,248,0)}50%{box-shadow:0 0 16px rgba(160,74,248,.55)}}
-@media(prefers-reduced-motion:reduce){.chint{animation:none}}
+
 .pcard.s0{--t:perspective(1400px) rotateY(9deg) rotateX(2deg);opacity:1;z-index:3;pointer-events:auto}
 .pcard.sp{--t:translate(-30%,-88%) rotate(-17deg) scale(.5);opacity:.8;z-index:1;pointer-events:auto}
 .pcard.sn{--t:translate(-26%,92%) rotate(13deg) scale(.5);opacity:.8;z-index:1;pointer-events:auto}
