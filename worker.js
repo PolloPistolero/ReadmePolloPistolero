@@ -30,8 +30,25 @@ async function highscore(request, env) {
   return json({ best: Math.max(s, best) });
 }
 
+// Optionaler Passwortschutz: nur aktiv, wenn in Cloudflare das Secret SITE_PASSWORD gesetzt ist.
+// Secret loeschen = Seite oeffentlich. Benutzername ist beliebig, nur das Passwort zaehlt.
+function authorized(request, env) {
+  if (!env.SITE_PASSWORD) return true;
+  const h = request.headers.get('authorization') || '';
+  if (!h.startsWith('Basic ')) return false;
+  let pw = '';
+  try { pw = atob(h.slice(6)).split(':').slice(1).join(':'); } catch { return false; }
+  const a = new TextEncoder().encode(pw), b = new TextEncoder().encode(env.SITE_PASSWORD);
+  if (a.length !== b.length) return false;
+  let d = 0; for (let i = 0; i < a.length; i++) d |= a[i] ^ b[i];
+  return d === 0;
+}
+
 export default {
   async fetch(request, env) {
+    if (!authorized(request, env)) {
+      return new Response('Passwort erforderlich', { status: 401, headers: { 'www-authenticate': 'Basic realm="marcwesthoff.com", charset="UTF-8"', 'cache-control': 'no-store' } });
+    }
     const p = new URL(request.url).pathname;
     if (p === '/api/contact') return contact(request, env);
     if (p === '/api/highscore') return highscore(request, env);
