@@ -46,10 +46,12 @@ function authorized(request, env) {
 
 export default {
   async fetch(request, env) {
+    const u = new URL(request.url);
+    if (u.protocol === 'http:') { u.protocol = 'https:'; return Response.redirect(u.toString(), 301); }
     if (!authorized(request, env)) {
       return new Response('Passwort erforderlich', { status: 401, headers: { 'www-authenticate': 'Basic realm="marcwesthoff.com", charset="UTF-8"', 'cache-control': 'no-store' } });
     }
-    const p = new URL(request.url).pathname;
+    const p = u.pathname;
     if (p === '/api/contact') return contact(request, env);
     if (p === '/api/highscore') return highscore(request, env);
     return env.ASSETS.fetch(request);
