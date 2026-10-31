@@ -237,7 +237,7 @@ section{padding:clamp(72px,10vw,140px) var(--gut)}
 .hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
 
 .about{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(28px,6vw,100px);align-items:center;padding:clamp(24px,4vw,56px) 0 clamp(72px,10vw,140px);scroll-margin-top:60px}
-.ab-ph{position:relative;width:100%;max-width:420px;aspect-ratio:556/989;overflow:hidden;cursor:crosshair;touch-action:pan-y;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
+.ab-ph,.ab-ph *,.stage,.stage *{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none;-webkit-user-drag:none}.ab-ph img{pointer-events:none}.ab-ph{position:relative;width:100%;max-width:420px;aspect-ratio:556/989;overflow:hidden;cursor:crosshair;touch-action:pan-y;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
 .ab-ph .st{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block;opacity:.88;-webkit-user-drag:none}
 .ab-real{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;pointer-events:none;-webkit-mask-image:radial-gradient(circle 130px at var(--mx,50%) var(--my,30%),#000 35%,transparent 75%);mask-image:radial-gradient(circle 130px at var(--mx,50%) var(--my,30%),#000 35%,transparent 75%);transition:opacity .3s}
 .ab-ph.hov .ab-real{opacity:1}
