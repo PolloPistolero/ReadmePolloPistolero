@@ -74,10 +74,10 @@ h1,h2,h3{font-family:var(--head);font-weight:800;letter-spacing:-.03em;line-heig
 .hero-copy{position:absolute;left:var(--gut);top:92px;max-width:min(380px,44vw);z-index:4}
 .hero-copy h1{font-size:var(--t-sub);line-height:1.08;margin-bottom:14px}
 .hero-copy p{color:var(--fg-dim);font-size:var(--t-body);margin-bottom:22px;max-width:34ch}
-.hold-demo{position:absolute;z-index:3;left:50%;width:52px;height:52px;margin-left:-26px;margin-top:-26px;top:calc(56px + (100% - 56px - 3.5vw)*.1 + (100% - 56px - 3.5vw)*.9*.5);pointer-events:none;opacity:0;animation:hdp 6s ease-in-out 5s 3 both}
+.hold-demo{position:absolute;z-index:3;left:50%;width:52px;height:52px;margin-left:-26px;margin-top:-26px;top:calc(56px + (100% - 56px - 3.5vw)*.1 + (100% - 56px - 3.5vw)*.9*.5);pointer-events:none;opacity:0;animation:hdp 6s ease-in-out 5s infinite both}
 .hold-demo svg{width:100%;height:100%;display:block}.hold-demo i{position:absolute;left:17px;top:17px;width:18px;height:18px;border-radius:50%;background:rgba(255,255,255,.55)}
 .hd-bg{fill:none;stroke:rgba(255,255,255,.28);stroke-width:2}
-.hd-pr{fill:none;stroke:#fff;stroke-width:2.6;stroke-linecap:round;stroke-dasharray:100 100;stroke-dashoffset:100;transform:rotate(-90deg);transform-origin:50% 50%;animation:hdr 6s linear 5s 3 both}
+.hd-pr{fill:none;stroke:#fff;stroke-width:2.6;stroke-linecap:round;stroke-dasharray:100 100;stroke-dashoffset:100;transform:rotate(-90deg);transform-origin:50% 50%;animation:hdr 6s linear 5s infinite both}
 @keyframes hdp{0%{opacity:0;transform:scale(1.6)}8%{opacity:1;transform:scale(1)}12%{transform:scale(.88)}45%{transform:scale(.88);opacity:1}52%{transform:scale(1.3);opacity:0}100%{opacity:0}}
 @keyframes hdr{0%,12%{stroke-dashoffset:100}45%,100%{stroke-dashoffset:0}}
 @media(max-width:760px){.hold-demo{top:calc(215px + (100% - 215px - 20vw)*.1 + (100% - 215px - 20vw)*.9*.5)}}
@@ -85,6 +85,13 @@ h1,h2,h3{font-family:var(--head);font-weight:800;letter-spacing:-.03em;line-heig
 .gh{position:absolute;width:34px;height:34px;margin:-17px 0 0 -17px;border-radius:50%;border:1.5px solid rgba(255,255,255,.85);background:rgba(255,255,255,.18);pointer-events:none;z-index:6;opacity:0}
 .gh.tap{animation:ghtap 1.8s ease both}
 @keyframes ghtap{0%{opacity:0;transform:scale(1.7)}20%{opacity:1;transform:scale(1)}35%{transform:scale(.8)}55%{transform:scale(1);opacity:1}100%{opacity:0;transform:scale(1.3)}}
+.hold-note{position:absolute;z-index:4;left:50%;transform:translateX(-50%);bottom:calc(14.6vw + 14px);display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;border:1px solid rgba(237,240,242,.22);background:rgba(10,10,10,.55);color:rgba(237,240,242,.8);font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .8s 1.2s}
+.hero.in .hold-note{opacity:1}
+.hold-note::before{content:"";width:9px;height:9px;border-radius:50%;border:1.5px solid rgba(237,240,242,.85);animation:hnp 2.4s ease-in-out infinite}
+@keyframes hnp{0%,100%{box-shadow:0 0 0 0 rgba(237,240,242,.4)}60%{box-shadow:0 0 0 6px rgba(237,240,242,0)}}
+.stage.holding~.hold-note{opacity:0;transition:opacity .2s}
+@media(max-width:760px){.hold-note{bottom:calc(19vw + 62px);font-size:10px;padding:5px 10px}}
+@media(prefers-reduced-motion:reduce){.hold-note::before{animation:none}}
 .hold-hint{position:absolute;z-index:3;left:50%;top:calc(56px + (100% - 56px - 3.5vw)*.1 + (100% - 56px - 3.5vw)*.9*.72);transform:translateX(-50%);display:inline-flex;align-items:center;gap:6px;padding:3px 8px;color:rgba(237,240,242,.55);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;white-space:nowrap;pointer-events:none;transition:opacity .4s}
 @media(max-width:760px){.hold-hint{top:calc(215px + (100% - 215px - 20vw)*.1 + (100% - 215px - 20vw)*.9*.7)}}
 .hold-hint::before{content:"";width:6px;height:6px;border-radius:50%;border:1px solid rgba(237,240,242,.6)}
@@ -566,6 +573,7 @@ try{history.scrollRestoration='manual'}catch(e){}try{scrollTo(0,0)}catch(e){}add
     <canvas id="reveal" role="img" aria-label="Marc Westhoff im Tweed-Sakko. Das Foto wird unter dem Cursor scharf."></canvas>
   </div>
   <div class="hold-demo" id="hold-demo" aria-hidden="true"><svg viewBox="0 0 48 48"><circle class="hd-bg" cx="24" cy="24" r="20"/><circle class="hd-pr" cx="24" cy="24" r="20" pathLength="100"/></svg><i></i></div>
+  <div class="hold-note" aria-hidden="true"><span data-de="2 Sekunden halten: mehr über mich" data-en="Hold 2 seconds: more about me">2 Sekunden halten: mehr über mich</span></div>
   <div class="hero-name" aria-hidden="true">Marc Westhoff</div>
   <h2 class="sr">Marc Westhoff</h2>
   <div class="hero-foot label"><span data-de="( Marketing und Brand Building für Gründer )" data-en="( Marketing and brand building for founders )">( Marketing und Brand Building für Gründer )</span><span data-de="( Scrollen )" data-en="( Scroll )">( Scrollen )</span></div>
@@ -811,6 +819,8 @@ const fine=matchMedia('(hover:hover) and (pointer:fine)').matches;
 /* Sprache */
 const html=document.documentElement;
 const ES={
+"2 Sekunden halten: mehr über mich":"Mantén 2 segundos: más sobre mí",
+
 "Marketing. Strategie. Action.":"Marketing. Estrategia. Acción.",
 "Ich gründe und verbinde Kreativität mit akademischen Konzepten und baue Marken.":"Fundo empresas, uno creatividad con conceptos académicos y construyo marcas.",
 "Gedrückt halten: mehr über mich":"Mantén pulsado: más sobre mí",
