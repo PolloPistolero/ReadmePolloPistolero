@@ -4,9 +4,22 @@
 const json = (o, s = 200) => new Response(JSON.stringify(o), { status: s, headers: { 'content-type': 'application/json', 'cache-control': 'no-store' } });
 const clip = (v, n) => String(v ?? '').trim().slice(0, n);
 const MAX = 5000;
+const CSP = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob:; font-src 'self' data:; connect-src 'self' https://formspree.io; form-action 'self' https://formspree.io; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; worker-src 'self' blob:";
+const SEC = {
+  'strict-transport-security': 'max-age=31536000; includeSubDomains',
+  'x-content-type-options': 'nosniff',
+  'referrer-policy': 'strict-origin-when-cross-origin',
+  'permissions-policy': 'camera=(), microphone=(), geolocation=(), payment=()',
+  'x-frame-options': 'DENY',
+  'content-security-policy': CSP
+};
+const secure = (r) => { const n = new Response(r.body, r); for (const k in SEC) n.headers.set(k, SEC[k]); return n; };
+// POSTs nur von der eigenen Seite akzeptieren
+const sameOrigin = (request, u) => { const o = request.headers.get('origin'); return !o || o === u.origin; };
 
-async function contact(request, env) {
+async function contact(request, env, u) {
   if (request.method !== 'POST') return json({ error: 'method' }, 405);
+  if (!sameOrigin(request, u)) return json({ error: 'origin' }, 403);
   const endpoint = env.FORM_ENDPOINT || 'https://formspree.io/f/xbggyjko';
   let b; try { b = await request.json(); } catch { return json({ error: 'bad request' }, 400); }
   const name = clip(b.name, 120), email = clip(b.email, 200), subject = clip(b.subject, 160), msg = clip(b.msg, 5000);
@@ -19,8 +32,9 @@ async function contact(request, env) {
   return r.ok ? json({ ok: true }) : json({ error: 'upstream' }, 502);
 }
 
-async function highscore(request, env) {
+async function highscore(request, env, u) {
   if (!env.SCORES) return json({ best: 0 });
+  if (request.method === 'POST' && !sameOrigin(request, u)) return json({ error: 'origin' }, 403);
   const best = +(await env.SCORES.get('best') || 0);
   if (request.method === 'GET') return json({ best });
   if (request.method !== 'POST') return json({ error: 'method' }, 405);
@@ -45,15 +59,16 @@ function authorized(request, env) {
 }
 
 export default {
-  async fetch(request, env) {
+  async fetch(request, env) { return secure(await handle(request, env)); }
+};
+async function handle(request, env) {
     const u = new URL(request.url);
     if (u.protocol === 'http:') { u.protocol = 'https:'; return Response.redirect(u.toString(), 301); }
     if (!authorized(request, env)) {
       return new Response('Passwort erforderlich', { status: 401, headers: { 'www-authenticate': 'Basic realm="marcwesthoff.com", charset="UTF-8"', 'cache-control': 'no-store' } });
     }
     const p = u.pathname;
-    if (p === '/api/contact') return contact(request, env);
-    if (p === '/api/highscore') return highscore(request, env);
+    if (p === '/api/contact') return contact(request, env, u);
+    if (p === '/api/highscore') return highscore(request, env, u);
     return env.ASSETS.fetch(request);
-  }
-};
+}

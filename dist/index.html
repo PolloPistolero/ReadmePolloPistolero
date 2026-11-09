@@ -13,6 +13,7 @@
 
 <meta name="theme-color" content="#0a0a0a">
 
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%2714%27 fill=%27%230a0a0a%27/%3E%3Ctext x=%2732%27 y=%2743%27 font-family=%27Arial,sans-serif%27 font-weight=%27800%27 font-size=%2730%27 text-anchor=%27middle%27 fill=%27%23edf0f2%27%3EMW%3C/text%3E%3C/svg%3E">
 
 <style>
 @font-face{font-family:"Inter Tight";src:url(fonts/inter-tight-latin-wght-normal.woff2) format("woff2");font-weight:100 900;font-display:swap}
@@ -85,7 +86,7 @@ h1,h2,h3{font-family:var(--head);font-weight:800;letter-spacing:-.03em;line-heig
 .hero{position:relative;min-height:100svh;overflow:hidden;isolation:isolate}
 .hero-copy{position:absolute;left:var(--gut);top:92px;max-width:min(380px,44vw);z-index:4}
 .hero-copy h1{font-size:var(--t-sub);line-height:1.08;margin-bottom:14px}
-.hero-copy p{color:var(--fg-dim);font-size:var(--t-body);margin-bottom:22px;max-width:34ch}
+.hero-copy p{color:var(--fg-dim);font-size:var(--t-body);margin-bottom:22px;max-width:34ch}.hero-copy .hero-line{color:var(--fg);font-size:calc(var(--t-body) + 1px);line-height:1.4;margin-bottom:12px;max-width:30ch}.hero-copy .hero-pun{font-size:calc(var(--t-body) - 2px);opacity:.72}
 .hold-demo{position:absolute;z-index:3;left:50%;width:52px;height:52px;margin-left:-26px;margin-top:-26px;top:calc(56px + (100% - 56px - 3.5vw)*.1 + (100% - 56px - 3.5vw)*.9*.5);pointer-events:none;opacity:0;animation:hdp 6s ease-in-out 5s infinite both}
 .hold-demo svg{width:100%;height:100%;display:block}.hold-demo i{position:absolute;left:17px;top:17px;width:18px;height:18px;border-radius:50%;background:rgba(255,255,255,.55)}
 .hd-bg{fill:none;stroke:rgba(255,255,255,.28);stroke-width:2}
@@ -124,7 +125,7 @@ h1,h2,h3{font-family:var(--head);font-weight:800;letter-spacing:-.03em;line-heig
 @media(max-width:760px){
   .hero-copy{top:78px;max-width:84vw}
   .hero-copy h1{font-size:21px;margin-bottom:8px}
-  .hero-copy p{font-size:14px;margin-bottom:0}
+  .hero-copy p{font-size:14px;margin-bottom:0}.hero-copy .hero-line{font-size:15px;margin-bottom:8px}.hero-copy .hero-pun{font-size:12.5px}
   .stage{top:calc(215px + (100% - 215px - 20vw)*.1);height:calc((100% - 215px - 20vw)*.9)}
   .hero-name{font-size:19vw;line-height:.82;white-space:normal;bottom:-1vw;padding:0 4vw;text-align:left}
   .hero-foot{display:none}
@@ -280,7 +281,7 @@ form input:focus,form textarea:focus{border-color:var(--acc);outline:none}
 form textarea{min-height:120px;resize:vertical}
 form .hint{font-size:13px;color:var(--fg-dim)}
 footer{padding:28px var(--gut) 40px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:16px 28px;justify-content:space-between;color:var(--fg-dim);font-size:13px}
-footer a{text-decoration:none}
+footer a{text-decoration:none;display:inline-block;padding:14px 4px;margin:-14px -4px}
 footer a:hover{color:var(--fg)}
 
 
@@ -546,13 +547,15 @@ body.menu-on{overflow:hidden}
 .more{display:inline-flex;align-items:center;gap:8px;margin-left:auto;text-decoration:none;color:var(--fg);font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:10px 4px}
 .more svg{width:14px;height:14px;animation:bob 1.6s ease-in-out infinite}.more.hot{color:var(--acc)}
 @keyframes bob{0%,100%{transform:translateY(-2px)}50%{transform:translateY(3px)}}
-#ld .ld-pc{font-size:.28em;letter-spacing:0;vertical-align:top;margin-left:.1em;opacity:.7}
+#ld .ld-pc{font-size:.28em;letter-spacing:0;vertical-align:top;margin-left:.1em;opacity:.7}#ld .ld-n{display:grid;gap:14px;justify-items:center;text-align:center;font-size:clamp(34px,7vw,88px);letter-spacing:-.035em;font-variant-numeric:normal;white-space:nowrap;animation:ldin .9s cubic-bezier(.22,1,.36,1) both}#ld .ld-n small{font:600 12px/1 'Libre Franklin',sans-serif;letter-spacing:.2em;text-transform:uppercase;color:rgba(237,240,242,.55)}@keyframes ldin{from{opacity:0;transform:translate(-50%,-46%)}to{opacity:1;transform:translate(-50%,-50%)}}#ld.fire .ld-n{animation:ldn .3s linear .05s forwards}@media(prefers-reduced-motion:reduce){#ld .ld-n{animation:none}}
 
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}html{scroll-behavior:auto}}
+input[aria-invalid=true],textarea[aria-invalid=true]{border-color:#ff7d7d!important;box-shadow:0 0 0 1px #ff7d7d}
+.fl-tl button::after{content:'';position:absolute;inset:-14px -8px}
 </style>
 
 
-<div id="ld" role="status" aria-label="Seite lädt"><span class="ld-l">Marc Westhoff</span><span class="ld-n" id="ld-nn"><span id="ld-n">000</span></span><svg class="ld-ring" id="ld-ring" viewBox="0 0 200 200" aria-hidden="true"><circle class="rg-bg" cx="100" cy="100" r="94"/><circle class="rg-pr rg-g2" cx="100" cy="100" r="94" pathLength="100"/><circle class="rg-pr rg-g1" cx="100" cy="100" r="94" pathLength="100"/><circle class="rg-pr" id="ld-pr" cx="100" cy="100" r="94" pathLength="100"/></svg><i id="ld-b" hidden></i></div>
+<div id="ld" role="status" aria-label="Seite lädt"><span class="ld-n" id="ld-nn"><span id="ld-n">Marc Westhoff</span><small>Marketing &amp; Brand Building</small></span><i id="ld-b" hidden></i></div>
 <script>
 try{history.scrollRestoration='manual'}catch(e){}try{scrollTo(0,0)}catch(e){}addEventListener('load',()=>{try{scrollTo(0,0)}catch(e){}});addEventListener('pageshow',()=>{try{scrollTo(0,0)}catch(e){}});document.documentElement.classList.add('ld-on');window.__hold=true</script>
 <header class="top">
@@ -584,7 +587,8 @@ try{history.scrollRestoration='manual'}catch(e){}try{scrollTo(0,0)}catch(e){}add
 <section class="hero" aria-label="Start" style="padding:0">
   <div class="hero-copy">
     <h1 data-de="Marc mag Marketing. Zufall? Nein." data-en="Marc likes marketing. Coincidence? No.">Marc mag Marketing. Zufall? Nein.</h1>
-    <p data-de="Mit dem Namen bleibt einem fast nichts anderes übrig." data-en="With a name like that, there was hardly another option.">Mit dem Namen bleibt einem fast nichts anderes übrig.</p>
+    <p class="hero-line" data-de="Marketing und Brand Building: Ich baue Marken, die man wiedererkennt." data-en="Marketing and brand building: I build brands people recognise.">Marketing und Brand Building: Ich baue Marken, die man wiedererkennt.</p>
+    <p class="hero-pun" data-de="Mit dem Namen bleibt einem fast nichts anderes übrig." data-en="With a name like that, there was hardly another option.">Mit dem Namen bleibt einem fast nichts anderes übrig.</p>
   </div>
   <div class="count" id="count" aria-hidden="true">000</div>
   <div class="stage" id="stage">
@@ -844,11 +848,12 @@ const M={de:{need:'Bitte Name, E-Mail und Nachricht ausfüllen.',snd:'Wird gesen
 en:{need:'Please fill in name, email and message.',snd:'Sending …',ok:'Thanks, your message has arrived. I will get back to you.',err:'That did not work, sorry. Please write to me directly: marcwesthoff@outlook.de'},
 es:{need:'Rellena nombre, correo y mensaje.',snd:'Enviando …',ok:'Gracias, tu mensaje ha llegado. Te respondo pronto.',err:'No ha funcionado. Escríbeme directamente: marcwesthoff@outlook.de'}};
 const L=()=>{const l=document.documentElement.lang;return M[l]?l:'de'};
-const say=(k,e)=>{st.textContent=M[L()][k];st.classList.toggle('err',!!e)};
+const FM={de:{name:'Bitte gib deinen Namen an.',email:'Bitte gib eine gültige E-Mail-Adresse an.',msg:'Bitte schreib kurz, worum es geht.'},en:{name:'Please enter your name.',email:'Please enter a valid email address.',msg:'Please tell me briefly what it is about.'},es:{name:'Indica tu nombre.',email:'Indica un correo válido.',msg:'Cuéntame brevemente de qué se trata.'}};
+const say=(k,e)=>{st.textContent=M[L()][k]||FM[L()][k];st.classList.toggle('err',!!e)};
 f.addEventListener('submit',async e=>{e.preventDefault();const d=Object.fromEntries(new FormData(f));
-if(d.website)return;if(!d.name.trim()||!/^\S+@\S+\.\S+$/.test(d.email.trim())||!d.msg.trim()){say('need',1);return}
+if(d.website)return;f.querySelectorAll('[aria-invalid]').forEach(x=>x.removeAttribute('aria-invalid'));const bad=!d.name.trim()?'name':!/^\S+@\S+\.\S+$/.test(d.email.trim())?'email':!d.msg.trim()?'msg':'';if(bad){const el=f.elements[bad];el.setAttribute('aria-invalid','true');say(bad,1);el.focus();return}
 bt.disabled=true;say('snd');
-let code=await send(d);if(!code){f.reset();say('ok')}else{say('err',1);st.textContent+=' ['+code+']'}bt.disabled=false});
+let code=await send(d);if(!code){f.reset();say('ok')}else{say('err',1);console.warn('Formular-Fehler',code)}bt.disabled=false});
 async function send(d){let c='';
 try{const r=await fetch('https://formspree.io/f/xbggyjko',{method:'POST',headers:{'content-type':'application/json',accept:'application/json'},body:JSON.stringify({name:d.name,email:d.email,_replyto:d.email,_subject:d.subject?'Website: '+d.subject:'Anfrage über marcwesthoff.com',message:d.msg})});if(r.ok)return 0;c='F'+r.status}catch(e){c='F0'}
 try{const r=await fetch('/api/contact',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({name:d.name,email:d.email,subject:d.subject||'',msg:d.msg})});if(r.ok)return 0;return c+'/A'+r.status}catch(e){return c+'/A0'}}
@@ -991,7 +996,7 @@ const ES={
 'Du hast alles gefunden. Dann sollten wir reden.':'Lo encontraste todo. Entonces deberíamos hablar.','E-Mail schreiben':'Escribir un correo','Energie und Impact':'Energía e impacto','Impressum (folgt in M5)':'Aviso legal (llega en M5)',
 'Jedes Projekt trägt sein Etikett: echt, Pitch oder eigenes Konzept. Wisch oder fahr über das Bild, dann wird es scharf.':'Cada proyecto lleva su etiqueta: real, pitch o concepto propio. Desliza o pasa el cursor sobre la imagen y se enfoca.',
 'Kontakt':'Contacto','Kreativität als Substanz':'Creatividad como sustancia','Marc mag Marketing. Zufall? Nein.':'A Marc le gusta el marketing. ¿Casualidad? No.','Mensch':'Persona',
-'Mit dem Namen bleibt einem fast nichts anderes übrig.':'Con ese nombre, apenas quedaba otra opción.','Mut zu <em>Humor</em>. Kreativität als Substanz. Das Handwerk und die Haltung.':'Valentía para el <em>humor</em>. Creatividad como sustancia. El oficio y la actitud.',
+'Marketing und Brand Building: Ich baue Marken, die man wiedererkennt.':'Marketing y construcción de marca: creo marcas que se reconocen.','Gründer':'Fundador','Mit dem Namen bleibt einem fast nichts anderes übrig.':'Con ese nombre, apenas quedaba otra opción.','Mut zu <em>Humor</em>. Kreativität als Substanz. Das Handwerk und die Haltung.':'Valentía para el <em>humor</em>. Creatividad como sustancia. El oficio y la actitud.',
 'Scrollen oder wischen →':'Desplázate o desliza →','Mut zu Humor':'Valentía para el humor','Nochmal':'Otra vez','Platzhaltertext für die About-Seite. Der echte Text entsteht in M4 nach deinen Angaben.':'Texto provisional para la página Sobre mí. El texto real llega en M4.',
 'Projekt anfragen':'Solicitar proyecto','Weiter: Über mich':'Siguiente: Sobre mí','Menü':'Menú','Spielend entdecken':'Descubrir jugando','Projekt anfragen.':'Solicitar proyecto.','Projekte':'Proyectos','Schließen':'Cerrar',
 'Vorschau: Das Formular versendet noch nichts. Bis dahin erreichst du mich per E-Mail, LinkedIn oder Instagram.':'Vista previa: el formulario aún no envía nada. Mientras tanto, escríbeme por correo, LinkedIn o Instagram.',
@@ -1018,7 +1023,7 @@ document.querySelectorAll('.lang [data-set]').forEach(b=>b.addEventListener('cli
 
 /* Menue, Fortschritt, Abschnittsnavigation */
 {const bg=$('bg-b'),mn=$('menu');
- const open=o=>{if(o){mn.hidden=false;document.body.classList.add('menu-on');requestAnimationFrame(()=>requestAnimationFrame(()=>mn.classList.add('on')));bg.setAttribute('aria-expanded','true');const f=mn.querySelector('a');if(f)setTimeout(()=>f.focus({preventScroll:true}),60)}
+ const open=o=>{const mm=document.querySelector('main');if(mm)mm.inert=!!o;if(o){mn.hidden=false;document.body.classList.add('menu-on');requestAnimationFrame(()=>requestAnimationFrame(()=>mn.classList.add('on')));bg.setAttribute('aria-expanded','true');const f=mn.querySelector('a');if(f)setTimeout(()=>f.focus({preventScroll:true}),60)}
   else{mn.classList.remove('on');document.body.classList.remove('menu-on');bg.setAttribute('aria-expanded','false');setTimeout(()=>{if(!mn.classList.contains('on'))mn.hidden=true},360)}};
  bg.addEventListener('click',e=>{e.stopPropagation();open(mn.hidden)});
  mn.addEventListener('click',e=>{const a=e.target.closest('a');
@@ -1092,7 +1097,7 @@ hero.addEventListener('pointermove',e=>{pos(e);active=true;kick()});
 hero.addEventListener('pointerleave',()=>{active=false});
 hero.addEventListener('pointerdown',e=>{pos(e);active=true;kick()});
 hero.addEventListener('pointerup',()=>{if(!fine)active=false});
-img.onload=()=>{ready=true;build();if(reduce){drawReveal();drawDots(1);hero.classList.add('in');dc.style.opacity=0}else{window.__intro=runIntro}};
+img.onload=()=>{ready=true;build();if(reduce){drawReveal();drawDots(1);hero.classList.add('in');dc.style.opacity=0;const cn=document.getElementById('count');if(cn)cn.remove()}else{window.__intro=runIntro}};
 img.src='assets/person.webp';
 new IntersectionObserver(es=>{if(es[0].isIntersecting&&ready&&!animating&&dots.length){try{drawDots(1)}catch(e){}}},{threshold:.01}).observe(hero);
 addEventListener('pageshow',()=>{if(ready&&!animating&&dots.length)drawDots(1)});
@@ -1307,7 +1312,7 @@ function ppFilmHTML(k,pj){const F={sc:flSC(k)},n=F.sc.length,l=L(),ti=pj.de[0];
   '<div class="fl-hint" id="fl-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>'+flT(['Nach unten scrollen oder wischen','Scroll down or swipe up'])+'</div>'+
   '<div class="fl-nb fl-pb" id="fl-pb" aria-hidden="true"><span class="fl-nbt">'+flPT(k)+'</span><span class="fl-nbr"><i id="fl-pbf"></i></span></div>'+
   '<div class="fl-nb" id="fl-nb" aria-hidden="true"><span class="fl-nbt">'+flT(['Weiterscrollen zum nächsten Projekt','Keep scrolling for the next project'])+' · <b id="fl-nbn"></b></span><span class="fl-nbr"><i id="fl-nbf"></i></span></div><button type="button" class="fl-mb2" id="fl-mb2">'+flT(['Mehr lesen','Read more'])+' ↓</button>'+
-  '<div class="fl-hud"><span class="fl-cnt" id="fl-cnt">01 / '+String(n).padStart(2,'0')+'</span><div class="fl-tl" id="fl-tl" role="group" aria-label="'+(l==='de'?'Zeitstrang':'Timeline')+'"><i class="fl-tlb"></i><i class="fl-tlf" id="fl-tlf"></i>'+F.sc.map((c,i)=>'<button type="button" data-g="'+i+'" style="left:'+(i/(n-1)*100).toFixed(2)+'%" aria-label="'+(i+1)+'"'+(i?'':' class="on"')+'></button>').join('')+'<b class="fl-ph" id="fl-ph" aria-hidden="true"></b></div><img src="'+LOGO[pj.k]+'" alt="" aria-hidden="true"></div></div></div>'+
+  '<div class="fl-hud"><span class="fl-cnt" id="fl-cnt">01 / '+String(n).padStart(2,'0')+'</span><div class="fl-tl" id="fl-tl" role="group" aria-label="'+(l==='de'?'Zeitstrang':'Timeline')+'"><i class="fl-tlb"></i><i class="fl-tlf" id="fl-tlf"></i>'+F.sc.map((c,i)=>'<button type="button" data-g="'+i+'" style="left:'+(i/(n-1)*100).toFixed(2)+'%" aria-label="'+(i+1)+' / '+n+': '+esc(trT(c.lb,l))+'"'+(i?'':' class="on"')+'></button>').join('')+'<b class="fl-ph" id="fl-ph" aria-hidden="true"></b></div><img src="'+LOGO[pj.k]+'" alt="" aria-hidden="true"></div></div></div>'+
   '<section class="fl-more"><button type="button" class="fl-mb" id="fl-mb" aria-expanded="false">'+flT(['Mehr lesen','Read more'])+'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M8 2v11M3.5 9 8 13.5 12.5 9"/></svg></button><span class="fl-mn">'+flT(['Die ganze Geschichte zum Projekt','The full story of the project'])+'</span><div class="fl-mc" id="fl-mc" hidden>@@MORE@@</div></section></div>'}
 let flCur=-1,flRaf=0,flOn=null;
 const flNet=()=>{const c=navigator.connection;return !!(c&&(c.saveData||/^(slow-2g|2g|3g)$/.test(c.effectiveType||'')))};
@@ -1903,17 +1908,17 @@ document.querySelectorAll('.tat').forEach(b=>b.addEventListener('click',async()=
 </script>
 <script>
 (()=>{
-const ld=document.getElementById('ld'),nEl=document.getElementById('ld-n'),bar=document.getElementById('ld-b'),pr=(()=>{const L=[...document.querySelectorAll('#ld .rg-pr')];return {style:{set strokeDasharray(v){L.forEach(e=>e.style.strokeDasharray=v)}}}})();
+const ld=document.getElementById('ld'),nEl={},bar=document.getElementById('ld-b'),pr=(()=>{const L=[...document.querySelectorAll('#ld .rg-pr')];return {style:{set strokeDasharray(v){L.forEach(e=>e.style.strokeDasharray=v)}}}})();
 {const nl=(navigator.language||'de').slice(0,2),lt=document.getElementById('ld-t');if(lt)lt.textContent=nl==='de'?'Seite lädt':nl==='es'?'Cargando':'Loading'}
 let started=false,warmDone=false;const start=()=>{if(started)return;started=true;try{window.__start()}catch(e){console.error(e)}
   Promise.race([(window.__warm?window.__warm():Promise.resolve()),new Promise(r=>setTimeout(r,7000))]).catch(()=>{}).then(()=>{warmDone=true})};
-const t0=performance.now(),MIN=1400,MAX=16000;
+const t0=performance.now(),MIN=1200,MAX=5000;const slowNet=(c=>!!(c&&(c.saveData||/^(slow-2g|2g|3g)$/.test(c.effectiveType||'')||(c.downlink&&c.downlink<1.2))))(navigator.connection);if(slowNet)window.__lite=true;
 const A='assets/',P=['barbershop','express','coffee','caseflow','burger','doener','mix','felazio'];
-const imgs=[[A+'person.webp',8]];
+const imgs=[[A+'person.webp',8]];if(!slowNet){
 P.forEach(k=>{const vq=(k==='caseflow'||k==='barbershop'||k==='express')?'?v=4':'';imgs.push([A+'d-'+k+'.png'+((k==='caseflow'||k==='barbershop')?'?v=4':'?v=7'),2],[A+'c-'+k+'.jpg'+vq,2],[A+'l-'+k+(k==='felazio'?'-wappen':'')+'.png',1])});
 ['huhn-0','kanne-0','stift-0','blitz-0','huhn','espresso','stift','blitz','snoopy'].forEach(k=>imgs.push([A+'tat-'+k+'.png',1]));
-['cf-midnight','cf-dustfire','cf-terra','cf-kreislauf','cf-header','cf-logo'].forEach(k=>imgs.push([A+k+'.jpg',1]));imgs.push([A+'cf-wortmarke.png',1],[A+'g-caseflow-0.jpg',1]);
-const vids=[...document.querySelectorAll('video.hv')];
+['cf-midnight','cf-dustfire','cf-terra','cf-kreislauf','cf-header','cf-logo'].forEach(k=>imgs.push([A+k+'.jpg',1]));imgs.push([A+'cf-wortmarke.png',1],[A+'g-caseflow-0.jpg',1]);}
+const vids=slowNet?[]:[...document.querySelectorAll('video.hv')];
 const items=[];let done=0,total=0;
 const W=(w)=>{total+=w;return w};
 const fin=(w)=>{done+=w};
@@ -1936,13 +1941,13 @@ const tick=()=>{
   const target=Math.min(Math.min(real,timeCap)*.9+(warmDone?.1:0),1)*100;
   shown+=(target-shown)*.12+.15; if(shown>target)shown=target;
   const v=Math.min(100,Math.floor(shown+.0001));
-  nEl.textContent=String(v).padStart(3,'0');if(pr)pr.style.strokeDasharray=Math.max(.01,shown)+' 100';
+  
   if(v>=100&&!fired){fired=true;finish();return}
   if(el>MAX&&!fired){fired=true;finish();return}
   if(shown>=90&&started&&!warmDone&&el>MAX)warmDone=true;
   requestAnimationFrame(tick)};
 const finish=()=>{
-  nEl.textContent='100';if(pr)pr.style.strokeDasharray='100 100';
+  
   try{const n=document.getElementById('ld-nn').getBoundingClientRect();ld.style.setProperty('--hx',(n.left+n.width/2)+'px');ld.style.setProperty('--hy',(n.top+n.height/2)+'px')}catch(e){}
   ld.classList.add('fire');
   setTimeout(()=>{try{scrollTo(0,0)}catch(e){}start();window.__hold=false;(window.__hq||[]).splice(0).forEach(f=>f());if(window.__intro)window.__intro();ld.classList.add('out');document.documentElement.classList.remove('ld-on');setTimeout(()=>ld.remove(),1400)},430)};
