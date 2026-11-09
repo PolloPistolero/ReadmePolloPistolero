@@ -34,6 +34,7 @@ def build(k):
         else:
             c['m']=[[r.get('file',i),r.get('label') or r.get('alt') or i] for i,r in zip(ids,rs)]
             c['w']=s.get('w') or rs[0]['w'];c['hh']=s.get('hh') or rs[0]['h']
+        if s.get('keep'):c['keep']=1
         live.append(c)
     if live:live[0]['h1']=1
     return live
