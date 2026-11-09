@@ -547,7 +547,7 @@ body.menu-on{overflow:hidden}
 .more{display:inline-flex;align-items:center;gap:8px;margin-left:auto;text-decoration:none;color:var(--fg);font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:10px 4px}
 .more svg{width:14px;height:14px;animation:bob 1.6s ease-in-out infinite}.more.hot{color:var(--acc)}
 @keyframes bob{0%,100%{transform:translateY(-2px)}50%{transform:translateY(3px)}}
-#ld .ld-pc{font-size:.28em;letter-spacing:0;vertical-align:top;margin-left:.1em;opacity:.7}#ld .ld-n{display:grid;gap:14px;justify-items:center;text-align:center;font-size:clamp(34px,7vw,88px);letter-spacing:-.035em;font-variant-numeric:normal;white-space:nowrap;animation:ldin .9s cubic-bezier(.22,1,.36,1) both}#ld .ld-n small{font:600 12px/1 'Libre Franklin',sans-serif;letter-spacing:.2em;text-transform:uppercase;color:rgba(237,240,242,.55)}@keyframes ldin{from{opacity:0;transform:translate(-50%,-46%)}to{opacity:1;transform:translate(-50%,-50%)}}#ld.fire .ld-n{animation:ldn .3s linear .05s forwards}@media(prefers-reduced-motion:reduce){#ld .ld-n{animation:none}}
+#ld .ld-pc{font-size:.28em;letter-spacing:0;vertical-align:top;margin-left:.1em;opacity:.7}#ld .ld-n{display:grid;gap:14px;justify-items:center;text-align:center;font-size:clamp(34px,7vw,88px);letter-spacing:-.035em;font-variant-numeric:normal;white-space:nowrap;animation:ldin .9s cubic-bezier(.22,1,.36,1) both}#ld .ld-pp{font:600 13px/1 'Libre Franklin',sans-serif;letter-spacing:.12em;font-variant-numeric:tabular-nums;color:rgba(237,240,242,.8);margin-top:10px;min-width:4ch}#ld .ld-n small{font:600 12px/1 'Libre Franklin',sans-serif;letter-spacing:.2em;text-transform:uppercase;color:rgba(237,240,242,.55)}@keyframes ldin{from{opacity:0;transform:translate(-50%,-46%)}to{opacity:1;transform:translate(-50%,-50%)}}#ld.fire .ld-n{animation:ldn .3s linear .05s forwards}@media(prefers-reduced-motion:reduce){#ld .ld-n{animation:none}}
 
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}html{scroll-behavior:auto}}
 input[aria-invalid=true],textarea[aria-invalid=true]{border-color:#ff7d7d!important;box-shadow:0 0 0 1px #ff7d7d}
@@ -556,7 +556,7 @@ input[aria-invalid=true],textarea[aria-invalid=true]{border-color:#ff7d7d!import
 </style>
 
 
-<div id="ld" role="status" aria-label="Seite lädt"><span class="ld-n" id="ld-nn"><span id="ld-n">Marc Westhoff</span><small>Marketing &amp; Brand Building</small></span><i id="ld-b" hidden></i></div>
+<div id="ld" role="status" aria-label="Seite lädt"><span class="ld-n" id="ld-nn"><span id="ld-n">Marc Westhoff</span><small>Marketing &amp; Brand Building</small><span class="ld-pp" id="ld-p" aria-hidden="true">0 %</span></span><i id="ld-b" hidden></i></div>
 <script>
 try{history.scrollRestoration='manual'}catch(e){}try{scrollTo(0,0)}catch(e){}addEventListener('load',()=>{try{scrollTo(0,0)}catch(e){}});addEventListener('pageshow',()=>{try{scrollTo(0,0)}catch(e){}});document.documentElement.classList.add('ld-on');window.__hold=true</script>
 <header class="top">
@@ -1910,7 +1910,7 @@ document.querySelectorAll('.tat').forEach(b=>b.addEventListener('click',async()=
 </script>
 <script>
 (()=>{
-const ld=document.getElementById('ld'),nEl={},bar=document.getElementById('ld-b'),pr=(()=>{const L=[...document.querySelectorAll('#ld .rg-pr')];return {style:{set strokeDasharray(v){L.forEach(e=>e.style.strokeDasharray=v)}}}})();
+const ld=document.getElementById('ld'),nEl={},pEl=document.getElementById('ld-p'),lastV={v:-1},bar=document.getElementById('ld-b'),pr=(()=>{const L=[...document.querySelectorAll('#ld .rg-pr')];return {style:{set strokeDasharray(v){L.forEach(e=>e.style.strokeDasharray=v)}}}})();
 {const nl=(navigator.language||'de').slice(0,2),lt=document.getElementById('ld-t');if(lt)lt.textContent=nl==='de'?'Seite lädt':nl==='es'?'Cargando':'Loading'}
 let started=false,warmDone=false;const start=()=>{if(started)return;started=true;try{window.__start()}catch(e){console.error(e)}
   Promise.race([(window.__warm?window.__warm():Promise.resolve()),new Promise(r=>setTimeout(r,7000))]).catch(()=>{}).then(()=>{warmDone=true})};
@@ -1943,7 +1943,7 @@ const tick=()=>{
   const target=Math.min(Math.min(real,timeCap)*.9+(warmDone?.1:0),1)*100;
   shown+=(target-shown)*.12+.15; if(shown>target)shown=target;
   const v=Math.min(100,Math.floor(shown+.0001));
-  
+  if(pEl&&v!==lastV.v){lastV.v=v;pEl.textContent=v+' %'}
   if(v>=100&&!fired){fired=true;finish();return}
   if(el>MAX&&!fired){fired=true;finish();return}
   if(shown>=90&&started&&!warmDone&&el>MAX)warmDone=true;
@@ -1951,7 +1951,7 @@ const tick=()=>{
 const finish=()=>{
   
   try{const n=document.getElementById('ld-nn').getBoundingClientRect();ld.style.setProperty('--hx',(n.left+n.width/2)+'px');ld.style.setProperty('--hy',(n.top+n.height/2)+'px')}catch(e){}
-  ld.classList.add('fire');setTimeout(idleLoad,2500);
+  if(pEl)pEl.textContent='100 %';ld.classList.add('fire');setTimeout(idleLoad,2500);
   setTimeout(()=>{try{scrollTo(0,0)}catch(e){}start();window.__hold=false;(window.__hq||[]).splice(0).forEach(f=>f());if(window.__intro)window.__intro();ld.classList.add('out');document.documentElement.classList.remove('ld-on');setTimeout(()=>ld.remove(),1400)},430)};
 requestAnimationFrame(tick);
 })();
