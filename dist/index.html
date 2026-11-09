@@ -850,8 +850,8 @@ if(d.website)return;if(!d.name.trim()||!/^\S+@\S+\.\S+$/.test(d.email.trim())||!
 bt.disabled=true;say('snd');
 let code=await send(d);if(!code){f.reset();say('ok')}else{say('err',1);st.textContent+=' ['+code+']'}bt.disabled=false});
 async function send(d){let c='';
-try{const r=await fetch('/api/contact',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({name:d.name,email:d.email,subject:d.subject||'',msg:d.msg})});if(r.ok)return 0;c='A'+r.status}catch(e){c='A0'}
-try{const r=await fetch('https://formspree.io/f/xbggyjko',{method:'POST',headers:{'content-type':'application/json',accept:'application/json'},body:JSON.stringify({name:d.name,email:d.email,_replyto:d.email,_subject:d.subject?'Website: '+d.subject:'Anfrage über marcwesthoff.com',message:d.msg})});if(r.ok)return 0;return c+'/F'+r.status}catch(e){return c+'/F0'}}
+try{const r=await fetch('https://formspree.io/f/xbggyjko',{method:'POST',headers:{'content-type':'application/json',accept:'application/json'},body:JSON.stringify({name:d.name,email:d.email,_replyto:d.email,_subject:d.subject?'Website: '+d.subject:'Anfrage über marcwesthoff.com',message:d.msg})});if(r.ok)return 0;c='F'+r.status}catch(e){c='F0'}
+try{const r=await fetch('/api/contact',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({name:d.name,email:d.email,subject:d.subject||'',msg:d.msg})});if(r.ok)return 0;return c+'/A'+r.status}catch(e){return c+'/A0'}}
 })();
 </script>
 
