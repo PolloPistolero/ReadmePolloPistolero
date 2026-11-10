@@ -26,6 +26,7 @@
 
 #ld .ld-b{position:absolute;left:var(--gut,5vw);right:var(--gut,5vw);bottom:4vw;display:block;height:2px;background:rgba(237,240,242,.16)}#ld .ld-b i{display:block;height:100%;background:#a04af8;transform-origin:left;transform:scaleX(0)}
 html.ld-on,html.ld-on body{overflow:hidden}
+#ld{-webkit-mask-image:none!important;mask-image:none!important;transition:opacity .35s ease,visibility 0s .35s!important}#ld.out{opacity:0;visibility:hidden;pointer-events:none}#ld-c{position:absolute;inset:0;width:100%;height:100%;display:block}#ld-k{position:absolute;left:0;top:0;width:62px;height:88px;background:url(assets/huhn-walk.webp) 0 0/744px 88px no-repeat;transform-origin:50% 100%;will-change:transform;opacity:0}
 @property --r{syntax:"<length>";inherits:true;initial-value:0px}
 :root{
   color-scheme:dark;--bg:#0a0a0a;--fg:#edf0f2;--acc:#a04af8;
@@ -544,7 +545,7 @@ input[aria-invalid=true],textarea[aria-invalid=true]{border-color:#ff7d7d!import
 </style>
 
 
-<div id="ld" role="status" aria-label="Seite lädt"><span class="ld-n" id="ld-nn"><span id="ld-n">Marc Westhoff</span><small>Marketing &amp; Brand Building</small><span class="ld-pp" id="ld-p" aria-hidden="true">0 %</span></span><i id="ld-b" hidden></i></div>
+<div id="ld" role="status" aria-label="Seite lädt"><canvas id="ld-c" aria-hidden="true"></canvas><div id="ld-k" aria-hidden="true"></div><span id="ld-nn" hidden></span><i id="ld-b" hidden></i></div>
 <script>
 try{history.scrollRestoration='manual'}catch(e){}try{scrollTo(0,0)}catch(e){}addEventListener('load',()=>{try{scrollTo(0,0)}catch(e){}});addEventListener('pageshow',()=>{try{scrollTo(0,0)}catch(e){}});document.documentElement.classList.add('ld-on');window.__hold=true</script>
 <header class="top">
@@ -1058,7 +1059,7 @@ function drawDots(t){
 }
 function runIntro(){
   const cnt=document.getElementById('count');
-  if(reduce){drawDots(1);cnt.remove();hero.classList.add('in');return}
+  if(reduce||window.__introDone){drawDots(1);if(cnt)cnt.remove();hero.classList.add('in');if(!reduce)setTimeout(sweep,700);return}
   cnt.style.display='none';animating=true;t0=performance.now();
   (function f(n){const t=Math.min(1,(n-t0)/3000);drawDots(t);cnt.textContent=String(Math.round(t*100)).padStart(3,'0');
     if(t<1)requestAnimationFrame(f);else{animating=false;drawDots(1);cnt.classList.add('off');hero.classList.add('in');setTimeout(()=>cnt.remove(),1000);setTimeout(sweep,700)}})(t0);
@@ -1917,6 +1918,15 @@ imgs.forEach(([u,w])=>{W(w);tasks.push(new Promise(r=>{const i=new Image();i.onl
 vids.forEach(v=>{const w=W(4);tasks.push(new Promise(r=>{let ok=false;const g=()=>{if(ok)return;ok=true;fin(w);r()};v.preload='auto';v.addEventListener('canplaythrough',g,{once:true});v.addEventListener('loadeddata',()=>setTimeout(g,2500),{once:true});v.addEventListener('error',g,{once:true});setTimeout(g,9000);try{v.load()}catch(e){g()}}))});
 const fw=W(3);tasks.push((document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve()).then(()=>fin(fw)));
 let shown=0,fired=false,benched=false,fr=[],lastF=0;
+const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const lc=document.getElementById('ld-c'),lx=lc.getContext('2d'),lk=document.getElementById('ld-k');let vw=0,vh=0,LK=1,kx=0,ky=0,lineA=1;
+const lsize=()=>{vw=innerWidth;vh=innerHeight;LK=Math.min(devicePixelRatio||1,2);lc.width=Math.round(vw*LK);lc.height=Math.round(vh*LK)};lsize();addEventListener('resize',lsize);
+const lineY=x=>vh*.62+Math.sin(x/Math.max(320,vw)*7.85)*Math.min(18,vh*.022);
+const drawLine=(to)=>{lx.setTransform(LK,0,0,LK,0,0);lx.clearRect(0,0,vw,vh);lx.lineWidth=2.5;lx.lineCap='round';
+  lx.beginPath();for(let x=-4;x<=vw+4;x+=6)lx.lineTo(x,lineY(x));lx.strokeStyle='rgba(237,240,242,'+(.13*lineA)+')';lx.stroke();
+  lx.beginPath();for(let x=-4;x<to;x+=6)lx.lineTo(x,lineY(x));lx.lineTo(to,lineY(to));lx.strokeStyle='rgba(237,240,242,'+(.95*lineA)+')';lx.stroke()};
+const putK=(x,y,sx,sy,rot,fr)=>{lk.style.opacity=1;lk.style.backgroundPosition=(-(fr%12)*62)+'px 0';lk.style.transform='translate('+(x-31)+'px,'+(y-86)+'px) rotate('+(rot||0)+'deg) scale('+(-(sx||1))+','+(sy||1)+')'};
+const drawLd=p=>{kx=vw*.08+(vw*.5-vw*.08)*p;ky=lineY(kx);drawLine(kx);putK(kx,ky,1,1,0,RM?0:Math.floor(kx/8))};
 const bench=()=>{try{const cv=document.createElement('canvas');cv.width=800;cv.height=500;const x=cv.getContext('2d');const run=()=>{const t=performance.now();for(let k=0;k<5;k++){x.clearRect(0,0,800,500);x.beginPath();for(let i=0;i<4000;i++){const a=(i*37%800),b=(i*91%500);x.moveTo(a+3,b);x.arc(a,b,3,0,6.283)}x.fillStyle='#fff';x.fill()}x.getImageData(0,0,1,1);return performance.now()-t};run();const m=Math.min(run(),run());
   const weak=(navigator.deviceMemory&&navigator.deviceMemory<=2);
   if(m>40||weak)window.__lite=true;window.__bench=m}catch(e){}};
@@ -1931,16 +1941,39 @@ const tick=()=>{
   const target=Math.min(Math.min(real,timeCap)*.9+(warmDone?.1:0),1)*100;
   shown+=(target-shown)*.12+.15; if(shown>target)shown=target;
   const v=Math.min(100,Math.floor(shown+.0001));
-  if(pEl&&v!==lastV.v){lastV.v=v;pEl.textContent=v+' %'}
+  drawLd(Math.min(1,shown/100));
   if(v>=100&&!fired){fired=true;finish();return}
   if(el>MAX&&!fired){fired=true;finish();return}
   if(shown>=90&&started&&!warmDone&&el>MAX)warmDone=true;
   requestAnimationFrame(tick)};
 const finish=()=>{
-  
-  try{const n=document.getElementById('ld-nn').getBoundingClientRect();ld.style.setProperty('--hx',(n.left+n.width/2)+'px');ld.style.setProperty('--hy',(n.top+n.height/2)+'px')}catch(e){}
-  if(pEl)pEl.textContent='100 %';ld.classList.add('fire');setTimeout(idleLoad,2500);
-  setTimeout(()=>{try{scrollTo(0,0)}catch(e){}start();window.__hold=false;(window.__hq||[]).splice(0).forEach(f=>f());if(window.__intro)window.__intro();ld.classList.add('out');document.documentElement.classList.remove('ld-on');setTimeout(()=>ld.remove(),1400)},430)};
+  setTimeout(idleLoad,2500);try{scrollTo(0,0)}catch(e){}start();drawLd(1);
+  const done=()=>{try{scrollTo(0,0)}catch(e){}window.__hold=false;(window.__hq||[]).splice(0).forEach(f=>f());if(window.__intro)window.__intro();ld.classList.add('out');document.documentElement.classList.remove('ld-on');setTimeout(()=>ld.remove(),700)};
+  if(RM||window.__lite){setTimeout(done,250);return}
+  const tW=performance.now();(function wait(){const HD=window.__hd,st=document.getElementById('stage');
+    if(HD&&HD.d&&HD.d.length&&st){seq(HD,st.getBoundingClientRect(),done);return}
+    if(performance.now()-tW>900){done();return}requestAnimationFrame(wait)})()};
+const seq=(HD,R,done)=>{
+  const sc=R.width/HD.w,x0=kx,y0=ky,ex=R.left+R.width*.5,ey=Math.max(60,Math.min(y0-90,R.top+R.height*.42));
+  const D=HD.d,N=D.length,far=Math.max(vw,vh)*.5,P=new Float32Array(N*4);
+  for(let i=0;i<N;i++){const a=Math.random()*6.283,r=far*(.25+Math.random()*.9);P[i*4]=ex+Math.cos(a)*r;P[i*4+1]=ey+Math.sin(a)*r*.8;P[i*4+2]=Math.random()*.28;P[i*4+3]=.6+Math.random()*.4}
+  const eo=k=>1-Math.pow(1-k,3),eio=k=>k<.5?4*k*k*k:1-Math.pow(-2*k+2,3)/2;
+  const T1=520,T2=380,T3=1500,t0=performance.now();
+  (function f(n){const t=n-t0;
+    if(t<T1){const k=t/T1,j=Math.sin(t*.09)*2.2*k;drawLine(x0);
+      const g=lx.createRadialGradient(x0,y0-30,0,x0,y0-30,26+70*k);g.addColorStop(0,'rgba(160,74,248,'+(.55*k)+')');g.addColorStop(1,'rgba(160,74,248,0)');lx.fillStyle=g;lx.beginPath();lx.arc(x0,y0-30,26+70*k,0,6.283);lx.fill();
+      putK(x0+j,y0,1+.16*k,1-.24*k,0,0);requestAnimationFrame(f);return}
+    if(t<T1+T2){const k=eo((t-T1)/T2);drawLine(x0);const x=x0+(ex-x0)*k,y=y0+(ey+30-y0)*k-Math.sin(k*3.1416)*40;
+      putK(x,y+0,1-.25*k,1+.2*(1-k),k*14,3);requestAnimationFrame(f);return}
+    const u=Math.min(1,(t-T1-T2)/T3);lk.style.opacity=0;lineA=Math.max(0,1-u*2.2);drawLine(x0);
+    if(u<.3){const k=u/.3;lx.beginPath();lx.arc(ex,ey,10+far*.55*eo(k),0,6.283);lx.strokeStyle='rgba(160,74,248,'+(.6*(1-k))+')';lx.lineWidth=2+6*(1-k);lx.stroke();
+      const g=lx.createRadialGradient(ex,ey,0,ex,ey,90);g.addColorStop(0,'rgba(237,240,242,'+(.9*(1-k))+')');g.addColorStop(1,'rgba(237,240,242,0)');lx.fillStyle=g;lx.beginPath();lx.arc(ex,ey,90,0,6.283);lx.fill()}
+    lx.fillStyle='#edf0f2';lx.globalAlpha=.92;lx.beginPath();
+    for(let i=0;i<N;i++){const d=D[i],del=P[i*4+2],k=Math.max(0,Math.min(1,(u-del)/(1-.28)));if(k<=0)continue;
+      const a=eo(Math.min(1,k*2.2)),b=eio(k),mx=ex+(P[i*4]-ex)*a,my=ey+(P[i*4+1]-ey)*a,tx=R.left+d.tx*sc,ty=R.top+d.ty*sc;
+      const x=mx+(tx-mx)*b,y=my+(ty-my)*b,rr=Math.max(.5,d.rad*sc*(.45+.55*b));lx.moveTo(x+rr,y);lx.arc(x,y,rr,0,6.283)}
+    lx.fill();lx.globalAlpha=1;
+    if(u<1)requestAnimationFrame(f);else{window.__introDone=true;done()}})(t0)};
 requestAnimationFrame(tick);
 })();
 </script>
