@@ -26,7 +26,7 @@
 
 #ld .ld-b{position:absolute;left:var(--gut,5vw);right:var(--gut,5vw);bottom:4vw;display:block;height:2px;background:rgba(237,240,242,.16)}#ld .ld-b i{display:block;height:100%;background:#a04af8;transform-origin:left;transform:scaleX(0)}
 html.ld-on,html.ld-on body{overflow:hidden}
-#ld{-webkit-mask-image:none!important;mask-image:none!important;transition:opacity .35s ease,visibility 0s .35s!important}#ld.out{opacity:0;visibility:hidden;pointer-events:none}#ld-c{position:absolute;inset:0;width:100%;height:100%;display:block}#ld-k{position:absolute;left:0;top:0;width:62px;height:88px;background:url(assets/huhn-walk.webp) 0 0/744px 88px no-repeat;transform-origin:50% 100%;will-change:transform;opacity:0}
+#ld{-webkit-mask-image:none!important;mask-image:none!important;transition:opacity .45s ease,visibility 0s .45s!important;overflow:hidden}#ld.out{opacity:0;visibility:hidden;pointer-events:none}#ld .ld-nm{position:absolute;left:0;right:0;bottom:-1.4vw;padding-bottom:1.5vw;text-align:center;font-family:'Inter Tight',sans-serif;font-weight:800;letter-spacing:-.05em;line-height:.8;font-size:14.1vw;white-space:nowrap}#ld .ld-o{color:transparent;-webkit-text-stroke:1px rgba(237,240,242,.3)}#ld .ld-f{position:absolute;left:0;right:0;top:0;color:#edf0f2;clip-path:inset(-10% 100% -30% 0);will-change:clip-path}@media(max-width:760px){#ld .ld-nm{font-size:19vw;line-height:.82;white-space:normal;bottom:-1vw;padding:0 4vw;text-align:left}#ld .ld-f{left:4vw;right:4vw}}
 @property --r{syntax:"<length>";inherits:true;initial-value:0px}
 :root{
   color-scheme:dark;--bg:#0a0a0a;--fg:#edf0f2;--acc:#a04af8;
@@ -443,7 +443,7 @@ footer a:hover{color:var(--fg)}
 .fl-rw .fl-m{flex:none;max-height:none!important;height:min(calc(75svh - 160px),calc((100vw - 2*var(--gut) - 14px*(var(--nc) - 1))/var(--sar)),calc(1180px/var(--sar)))!important;width:auto!important;aspect-ratio:var(--ar)}
 @media(min-width:761px){.fl-h1+.fl-rw .fl-m{height:min(calc(63svh - 174px),calc((100vw - 2*var(--gut) - 14px*(var(--nc) - 1))/var(--sar)),calc(1180px/var(--sar)))!important}}
 #pp-cf.cfm .pp-h{display:none}
-.fl-hint{white-space:nowrap;position:absolute;left:50%;bottom:24px;transform:translateX(-50%);display:flex;align-items:center;gap:10px;padding:9px 16px 9px 12px;border:1px solid var(--line);border-radius:99px;background:rgba(10,10,10,.6);font-size:12px;letter-spacing:.1em;text-transform:uppercase;opacity:.9;transition:opacity .4s;z-index:3;pointer-events:none}.fl-hint.top{bottom:auto;top:20px}.fl-hint svg{width:16px;height:16px;animation:flb 1.4s ease-in-out infinite}@keyframes flb{0%,100%{transform:translateY(-3px);opacity:.5}50%{transform:translateY(4px);opacity:1}}@media(prefers-reduced-motion:reduce){.fl-hint svg{animation:none}}
+.fl-hint{white-space:nowrap;position:absolute;left:50%;bottom:24px;transform:translateX(-50%);display:flex;align-items:center;gap:10px;padding:9px 16px 9px 12px;border:1px solid var(--line);border-radius:99px;background:rgba(10,10,10,.6);font-size:12px;letter-spacing:.1em;text-transform:uppercase;opacity:.9;transition:opacity .4s;z-index:3;pointer-events:none}.fl-hint.top{bottom:auto;top:20px}.fl-hint{border-color:rgba(160,74,248,.55);background:rgba(20,12,30,.78);animation:flh 2.2s ease-in-out infinite}.fl-hint svg{animation:flha 1.4s ease-in-out infinite}@keyframes flh{0%,100%{box-shadow:0 0 0 0 rgba(160,74,248,0)}50%{box-shadow:0 0 0 6px rgba(160,74,248,.16)}}@keyframes flha{0%,100%{transform:none}50%{transform:translateY(3px)}}@media(prefers-reduced-motion:reduce){.fl-hint,.fl-hint svg{animation:none}}.fl-hint svg{width:16px;height:16px;animation:flb 1.4s ease-in-out infinite}@keyframes flb{0%,100%{transform:translateY(-3px);opacity:.5}50%{transform:translateY(4px);opacity:1}}@media(prefers-reduced-motion:reduce){.fl-hint svg{animation:none}}
 .fl-more{position:relative;z-index:6;background:var(--bg);margin-top:-30svh;padding:clamp(40px,6vw,72px) var(--gut) clamp(56px,8vw,96px);text-align:center;border-top:1px solid var(--line)}.fl-mb{cursor:pointer;display:inline-flex;align-items:center;gap:12px;padding:16px 28px;border:1px solid var(--line);border-radius:999px;font-size:15px;font-weight:600;letter-spacing:.02em;transition:.3s}.fl-mb:hover{border-color:currentColor}.fl-mb svg{width:16px;height:16px;transition:transform .3s}.fl-mb[aria-expanded=true]{display:none}.fl.plain .fl-more{margin-top:0}.fl-mn{display:block;margin-top:14px;font-size:13px;opacity:.6}.fl-mc{text-align:left;margin-top:clamp(32px,5vw,64px)}
 .fl.plain .fl-stage{position:static;height:auto;overflow:visible}.fl.plain .fl-sc{position:relative;inset:auto;opacity:1;visibility:visible;transform:none;padding:48px var(--gut);transition:none}.fl.plain .fl-hud,.fl.plain .fl-th,.fl.plain .fl-knot,.fl.plain .fl-hint{display:none}.fl.plain .fl-m{max-height:none;width:min(100%,1180px)}.fl.plain .fl-t::before{content:'';display:block;width:62px;height:88px;margin:0 auto 8px;background:url(assets/huhn-walk.webp) 0 0/744px 88px no-repeat;filter:drop-shadow(0 2px 6px rgba(0,0,0,.5))}.fl-zoom{position:fixed;inset:0;z-index:95;background:rgba(8,8,8,.96);display:grid;place-items:center;padding:max(12px,env(safe-area-inset-top)) 12px max(12px,env(safe-area-inset-bottom));cursor:zoom-out;overflow:auto;touch-action:pinch-zoom pan-x pan-y}.fl-zoom img{max-width:100%;max-height:100%;object-fit:contain;border-radius:4px;-webkit-touch-callout:none;user-select:none}.fl-zoom b{position:fixed;top:max(14px,env(safe-area-inset-top));right:14px;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.12);display:grid;place-items:center;color:#fff;font:600 20px/1 Inter Tight,sans-serif}.fl .fl-m img{cursor:zoom-in}
 @media(max-width:760px){.fl-t{font-size:20px}.fl-up{padding-bottom:110px}.fl-hint{bottom:14px;font-size:10px;letter-spacing:.06em;gap:8px;padding:8px 14px 8px 10px}}
@@ -545,7 +545,7 @@ input[aria-invalid=true],textarea[aria-invalid=true]{border-color:#ff7d7d!import
 </style>
 
 
-<div id="ld" role="status" aria-label="Seite lädt"><canvas id="ld-c" aria-hidden="true"></canvas><div id="ld-k" aria-hidden="true"></div><span id="ld-nn" hidden></span><i id="ld-b" hidden></i></div>
+<div id="ld" role="status" aria-label="Seite lädt"><div class="ld-nm" aria-hidden="true"><span class="ld-o">Marc Westhoff</span><span class="ld-f" id="ld-f">Marc Westhoff</span></div><span id="ld-nn" hidden></span><i id="ld-b" hidden></i></div>
 <script>
 try{history.scrollRestoration='manual'}catch(e){}try{scrollTo(0,0)}catch(e){}addEventListener('load',()=>{try{scrollTo(0,0)}catch(e){}});addEventListener('pageshow',()=>{try{scrollTo(0,0)}catch(e){}});document.documentElement.classList.add('ld-on');window.__hold=true</script>
 <header class="top">
@@ -986,7 +986,7 @@ const ES={
 'Du hast alles gefunden. Dann sollten wir reden.':'Lo encontraste todo. Entonces deberíamos hablar.','E-Mail schreiben':'Escribir un correo','Energie und Impact':'Energía e impacto','Impressum (folgt in M5)':'Aviso legal (llega en M5)',
 'Jedes Projekt trägt sein Etikett: echt, Pitch oder eigenes Konzept. Wisch oder fahr über das Bild, dann wird es scharf.':'Cada proyecto lleva su etiqueta: real, pitch o concepto propio. Desliza o pasa el cursor sobre la imagen y se enfoca.',
 'Kontakt':'Contacto','Kreativität als Substanz':'Creatividad como sustancia','Marc mag Marketing. Zufall? Nein.':'A Marc le gusta el marketing. ¿Casualidad? No.','Mensch':'Persona',
-'Marketing und Brand Building: Ich baue Marken, die man wiedererkennt.':'Marketing y construcción de marca: creo marcas que se reconocen.','Gründer':'Fundador','Mit dem Namen bleibt einem fast nichts anderes übrig.':'Con ese nombre, apenas quedaba otra opción.','Mut zu <em>Humor</em>. Kreativität als Substanz. Das Handwerk und die Haltung.':'Valentía para el <em>humor</em>. Creatividad como sustancia. El oficio y la actitud.',
+'Marketing und Brand Building: Ich baue Marken, die man wiedererkennt.':'Marketing y construcción de marca: creo marcas que se reconocen.','Gründer':'Fundador','Nach unten scrollen oder seitlich wischen':'Desliza hacia abajo o hacia un lado','Nach unten scrollen':'Desliza hacia abajo','Mit dem Namen bleibt einem fast nichts anderes übrig.':'Con ese nombre, apenas quedaba otra opción.','Mut zu <em>Humor</em>. Kreativität als Substanz. Das Handwerk und die Haltung.':'Valentía para el <em>humor</em>. Creatividad como sustancia. El oficio y la actitud.',
 'Scrollen oder wischen →':'Desplázate o desliza →','Mut zu Humor':'Valentía para el humor','Nochmal':'Otra vez','Platzhaltertext für die About-Seite. Der echte Text entsteht in M4 nach deinen Angaben.':'Texto provisional para la página Sobre mí. El texto real llega en M4.',
 'Projekt anfragen':'Solicitar proyecto','Weiter: Über mich':'Siguiente: Sobre mí','Menü':'Menú','Spielend entdecken':'Descubrir jugando','Projekt anfragen.':'Solicitar proyecto.','Projekte':'Proyectos','Schließen':'Cerrar',
 'Vorschau: Das Formular versendet noch nichts. Bis dahin erreichst du mich per E-Mail, LinkedIn oder Instagram.':'Vista previa: el formulario aún no envía nada. Mientras tanto, escríbeme por correo, LinkedIn o Instagram.',
@@ -1059,7 +1059,7 @@ function drawDots(t){
 }
 function runIntro(){
   const cnt=document.getElementById('count');
-  if(reduce||window.__introDone){drawDots(1);if(cnt)cnt.remove();hero.classList.add('in');if(!reduce)setTimeout(sweep,700);return}
+  if(reduce){drawDots(1);cnt.remove();hero.classList.add('in');return}
   cnt.style.display='none';animating=true;t0=performance.now();
   (function f(n){const t=Math.min(1,(n-t0)/3000);drawDots(t);cnt.textContent=String(Math.round(t*100)).padStart(3,'0');
     if(t<1)requestAnimationFrame(f);else{animating=false;drawDots(1);cnt.classList.add('off');hero.classList.add('in');setTimeout(()=>cnt.remove(),1000);setTimeout(sweep,700)}})(t0);
@@ -1299,7 +1299,7 @@ function ppFilmHTML(k,pj){const F={sc:flSC(k)},n=F.sc.length,l=L(),ti=pj.de[0];
   const mp=m.split('@@DN@@'),up=mp[0],tb=mp[1]||'';return '<section class="fl-sc'+(c.k==='q'?' fl-sq':'')+(i?'':' on')+'" data-i="'+i+'" aria-label="'+(i+1)+' / '+n+'"><div class="fl-up">'+h+up+'</div><div class="fl-dn">'+tb+t+'</div></section>'}).join('');
  return '<div class="fl" id="fl"><div class="fl-track" style="height:'+((n-1)*90+270)+'svh"><div class="fl-stage">'+sc+
   '<div class="fl-th" id="fl-th" aria-hidden="true"></div><div class="fl-knot" id="fl-knot" aria-hidden="true"></div>'+
-  '<div class="fl-hint" id="fl-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>'+flT(['Nach unten scrollen oder wischen','Scroll down or swipe up'])+'</div>'+
+  '<div class="fl-hint" id="fl-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>'+(matchMedia('(hover:none)').matches?flT(['Nach unten scrollen oder seitlich wischen','Scroll down or swipe sideways']):flT(['Nach unten scrollen','Scroll down']))+'</div>'+
   '<div class="fl-nb fl-pb" id="fl-pb" aria-hidden="true"><span class="fl-nbt">'+flPT(k)+'</span><span class="fl-nbr"><i id="fl-pbf"></i></span></div>'+
   '<div class="fl-nb" id="fl-nb" aria-hidden="true"><span class="fl-nbt">'+flT(['Weiterscrollen zum nächsten Projekt','Keep scrolling for the next project'])+' · <b id="fl-nbn"></b></span><span class="fl-nbr"><i id="fl-nbf"></i></span></div><button type="button" class="fl-mb2" id="fl-mb2">'+flT(['Mehr lesen','Read more'])+' ↓</button><button type="button" class="fl-mb2 fl-nx2" id="fl-nx2">'+flT(['Nächstes Projekt','Next project'])+' →</button>'+
   '<div class="fl-hud"><span class="fl-cnt" id="fl-cnt">01 / '+String(n).padStart(2,'0')+'</span><div class="fl-tl" id="fl-tl" role="group" aria-label="'+(l==='de'?'Zeitstrang':'Timeline')+'"><i class="fl-tlb"></i><i class="fl-tlf" id="fl-tlf"></i>'+F.sc.map((c,i)=>'<button type="button" data-g="'+i+'" style="left:'+(i/(n-1)*100).toFixed(2)+'%" aria-label="'+(i+1)+' / '+n+': '+esc(trT(c.lb,l))+'"'+(i?'':' class="on"')+'></button>').join('')+'<b class="fl-ph" id="fl-ph" aria-hidden="true"></b></div><img src="'+LOGO[pj.k]+'" alt="" aria-hidden="true"></div></div></div>'+
@@ -1314,7 +1314,12 @@ function flInit(k){const root=$('fl');if(!root)return;root.addEventListener('cli
  const toP=f=>{const {top,tot}=tot0();pp.scrollTo({top:top+f*tot,behavior:'auto'})};
  const fx=e=>{const r=tl.getBoundingClientRect();return Math.max(0,Math.min(1,(e.clientX-r.left)/r.width))};
  tl.addEventListener('pointerdown',e=>{if(e.target.closest('button'))return;dragging=true;tl.setPointerCapture(e.pointerId);toP(fx(e))});tl.addEventListener('pointermove',e=>{if(dragging)toP(fx(e))});const un=()=>{dragging=false};tl.addEventListener('pointerup',un);tl.addEventListener('pointercancel',un);
- dots.forEach(b=>b.onclick=()=>{const i=+b.dataset.g,r=track.getBoundingClientRect(),pr=pp.getBoundingClientRect(),top=r.top-pr.top+pp.scrollTop;pp.scrollTo({top:top+i*pp.clientHeight*.9+4,behavior:reduce?'auto':'smooth'})});
+ const goSc=i=>{const r=track.getBoundingClientRect(),pr=pp.getBoundingClientRect(),top=r.top-pr.top+pp.scrollTop;pp.scrollTo({top:top+i*pp.clientHeight*.9+4,behavior:reduce?'auto':'smooth'})};
+ dots.forEach(b=>b.onclick=()=>goSc(+b.dataset.g));
+ if(!plain){let sx=0,sy=0,sT=0,sOk=0;root.addEventListener('touchstart',e=>{sOk=e.touches.length===1&&!e.target.closest('.fl-tabs,.fl-zoom,button,video');const t=e.touches[0];sx=t.clientX;sy=t.clientY;sT=performance.now()},{passive:true});
+  root.addEventListener('touchend',e=>{if(!sOk)return;const t=e.changedTouches[0],dx=t.clientX-sx,dy=t.clientY-sy;if(Math.abs(dx)<48||Math.abs(dx)<Math.abs(dy)*1.6||performance.now()-sT>700)return;window.__flUsed=1;
+   const cur=Math.max(0,dots.findIndex(d=>d.classList.contains('on'))),ni=cur+(dx<0?1:-1);if(ni<0)return;if(ni>n-1){pp.scrollBy({top:pp.clientHeight*.75,behavior:'smooth'});return}goSc(ni)},{passive:true});
+  if(!reduce&&!window.__flNudged)setTimeout(()=>{if(window.__flUsed||!track.isConnected||pp.scrollTop>tot0().top+8)return;window.__flNudged=1;const {top}=tot0(),a=top+pp.clientHeight*.2;pp.scrollTo({top:a,behavior:'smooth'});setTimeout(()=>{if(Math.abs(pp.scrollTop-a)<pp.clientHeight*.12)pp.scrollTo({top:Math.max(0,top),behavior:'smooth'});},850)},2800)}
   $('fl-nx2').onclick=()=>{if(nxGo)return;nxGo=1;pp.style.overflowY='hidden';ppKey=PROJ[nxI].k;setIdx(nxI);window.__txSkip=1;ppOpen(ppOpener)};
   $('fl-mb2').onclick=()=>{noJ=1;pgm=performance.now()+2600;const m=root.querySelector('.fl-more'),b=$('fl-mb');if(b.getAttribute('aria-expanded')!=='true')b.click();const t=m.getBoundingClientRect().top-pp.getBoundingClientRect().top+pp.scrollTop;pp.scrollTo({top:t,behavior:reduce?'auto':'smooth'})};
  if(pp._flx)pp._flx.forEach(a=>pp.removeEventListener(a[0],a[1]));pp._flx=[];
@@ -1918,15 +1923,8 @@ imgs.forEach(([u,w])=>{W(w);tasks.push(new Promise(r=>{const i=new Image();i.onl
 vids.forEach(v=>{const w=W(4);tasks.push(new Promise(r=>{let ok=false;const g=()=>{if(ok)return;ok=true;fin(w);r()};v.preload='auto';v.addEventListener('canplaythrough',g,{once:true});v.addEventListener('loadeddata',()=>setTimeout(g,2500),{once:true});v.addEventListener('error',g,{once:true});setTimeout(g,9000);try{v.load()}catch(e){g()}}))});
 const fw=W(3);tasks.push((document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve()).then(()=>fin(fw)));
 let shown=0,fired=false,benched=false,fr=[],lastF=0;
-const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
-const lc=document.getElementById('ld-c'),lx=lc.getContext('2d'),lk=document.getElementById('ld-k');let vw=0,vh=0,LK=1,kx=0,ky=0,lineA=1;
-const lsize=()=>{vw=innerWidth;vh=innerHeight;LK=Math.min(devicePixelRatio||1,2);lc.width=Math.round(vw*LK);lc.height=Math.round(vh*LK)};lsize();addEventListener('resize',lsize);
-const lineY=x=>vh*.62+Math.sin(x/Math.max(320,vw)*7.85)*Math.min(18,vh*.022);
-const drawLine=(to)=>{lx.setTransform(LK,0,0,LK,0,0);lx.clearRect(0,0,vw,vh);lx.lineWidth=2.5;lx.lineCap='round';
-  lx.beginPath();for(let x=-4;x<=vw+4;x+=6)lx.lineTo(x,lineY(x));lx.strokeStyle='rgba(237,240,242,'+(.13*lineA)+')';lx.stroke();
-  lx.beginPath();for(let x=-4;x<to;x+=6)lx.lineTo(x,lineY(x));lx.lineTo(to,lineY(to));lx.strokeStyle='rgba(237,240,242,'+(.95*lineA)+')';lx.stroke()};
-const putK=(x,y,sx,sy,rot,fr)=>{lk.style.opacity=1;lk.style.backgroundPosition=(-(fr%12)*62)+'px 0';lk.style.transform='translate('+(x-31)+'px,'+(y-86)+'px) rotate('+(rot||0)+'deg) scale('+(-(sx||1))+','+(sy||1)+')'};
-const drawLd=p=>{kx=vw*.08+(vw*.5-vw*.08)*p;ky=lineY(kx);drawLine(kx);putK(kx,ky,1,1,0,RM?0:Math.floor(kx/8))};
+const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;const lf=document.getElementById('ld-f');
+const drawLd=p=>{if(lf)lf.style.clipPath='inset(-10% '+(100-p*100).toFixed(1)+'% -30% 0)'};
 const bench=()=>{try{const cv=document.createElement('canvas');cv.width=800;cv.height=500;const x=cv.getContext('2d');const run=()=>{const t=performance.now();for(let k=0;k<5;k++){x.clearRect(0,0,800,500);x.beginPath();for(let i=0;i<4000;i++){const a=(i*37%800),b=(i*91%500);x.moveTo(a+3,b);x.arc(a,b,3,0,6.283)}x.fillStyle='#fff';x.fill()}x.getImageData(0,0,1,1);return performance.now()-t};run();const m=Math.min(run(),run());
   const weak=(navigator.deviceMemory&&navigator.deviceMemory<=2);
   if(m>40||weak)window.__lite=true;window.__bench=m}catch(e){}};
@@ -1948,32 +1946,7 @@ const tick=()=>{
   requestAnimationFrame(tick)};
 const finish=()=>{
   setTimeout(idleLoad,2500);try{scrollTo(0,0)}catch(e){}start();drawLd(1);
-  const done=()=>{try{scrollTo(0,0)}catch(e){}window.__hold=false;(window.__hq||[]).splice(0).forEach(f=>f());if(window.__intro)window.__intro();ld.classList.add('out');document.documentElement.classList.remove('ld-on');setTimeout(()=>ld.remove(),700)};
-  if(RM||window.__lite){setTimeout(done,250);return}
-  const tW=performance.now();(function wait(){const HD=window.__hd,st=document.getElementById('stage');
-    if(HD&&HD.d&&HD.d.length&&st){seq(HD,st.getBoundingClientRect(),done);return}
-    if(performance.now()-tW>900){done();return}requestAnimationFrame(wait)})()};
-const seq=(HD,R,done)=>{
-  const sc=R.width/HD.w,x0=kx,y0=ky,ex=R.left+R.width*.5,ey=Math.max(60,Math.min(y0-90,R.top+R.height*.42));
-  const D=HD.d,N=D.length,far=Math.max(vw,vh)*.5,P=new Float32Array(N*4);
-  for(let i=0;i<N;i++){const a=Math.random()*6.283,r=far*(.25+Math.random()*.9);P[i*4]=ex+Math.cos(a)*r;P[i*4+1]=ey+Math.sin(a)*r*.8;P[i*4+2]=Math.random()*.28;P[i*4+3]=.6+Math.random()*.4}
-  const eo=k=>1-Math.pow(1-k,3),eio=k=>k<.5?4*k*k*k:1-Math.pow(-2*k+2,3)/2;
-  const T1=520,T2=380,T3=1500,t0=performance.now();
-  (function f(n){const t=n-t0;
-    if(t<T1){const k=t/T1,j=Math.sin(t*.09)*2.2*k;drawLine(x0);
-      const g=lx.createRadialGradient(x0,y0-30,0,x0,y0-30,26+70*k);g.addColorStop(0,'rgba(160,74,248,'+(.55*k)+')');g.addColorStop(1,'rgba(160,74,248,0)');lx.fillStyle=g;lx.beginPath();lx.arc(x0,y0-30,26+70*k,0,6.283);lx.fill();
-      putK(x0+j,y0,1+.16*k,1-.24*k,0,0);requestAnimationFrame(f);return}
-    if(t<T1+T2){const k=eo((t-T1)/T2);drawLine(x0);const x=x0+(ex-x0)*k,y=y0+(ey+30-y0)*k-Math.sin(k*3.1416)*40;
-      putK(x,y+0,1-.25*k,1+.2*(1-k),k*14,3);requestAnimationFrame(f);return}
-    const u=Math.min(1,(t-T1-T2)/T3);lk.style.opacity=0;lineA=Math.max(0,1-u*2.2);drawLine(x0);
-    if(u<.3){const k=u/.3;lx.beginPath();lx.arc(ex,ey,10+far*.55*eo(k),0,6.283);lx.strokeStyle='rgba(160,74,248,'+(.6*(1-k))+')';lx.lineWidth=2+6*(1-k);lx.stroke();
-      const g=lx.createRadialGradient(ex,ey,0,ex,ey,90);g.addColorStop(0,'rgba(237,240,242,'+(.9*(1-k))+')');g.addColorStop(1,'rgba(237,240,242,0)');lx.fillStyle=g;lx.beginPath();lx.arc(ex,ey,90,0,6.283);lx.fill()}
-    lx.fillStyle='#edf0f2';lx.globalAlpha=.92;lx.beginPath();
-    for(let i=0;i<N;i++){const d=D[i],del=P[i*4+2],k=Math.max(0,Math.min(1,(u-del)/(1-.28)));if(k<=0)continue;
-      const a=eo(Math.min(1,k*2.2)),b=eio(k),mx=ex+(P[i*4]-ex)*a,my=ey+(P[i*4+1]-ey)*a,tx=R.left+d.tx*sc,ty=R.top+d.ty*sc;
-      const x=mx+(tx-mx)*b,y=my+(ty-my)*b,rr=Math.max(.5,d.rad*sc*(.45+.55*b));lx.moveTo(x+rr,y);lx.arc(x,y,rr,0,6.283)}
-    lx.fill();lx.globalAlpha=1;
-    if(u<1)requestAnimationFrame(f);else{window.__introDone=true;done()}})(t0)};
+  setTimeout(()=>{try{scrollTo(0,0)}catch(e){}window.__hold=false;(window.__hq||[]).splice(0).forEach(f=>f());document.querySelectorAll('.hero-name .ch').forEach(c=>{c.style.transition='none';c.style.transform='none'});if(window.__intro)window.__intro();ld.classList.add('out');document.documentElement.classList.remove('ld-on');setTimeout(()=>ld.remove(),800)},320)};
 requestAnimationFrame(tick);
 })();
 </script>
