@@ -38,7 +38,7 @@
 
 #ld .ld-b{position:absolute;left:var(--gut,5vw);right:var(--gut,5vw);bottom:4vw;display:block;height:2px;background:rgba(237,240,242,.16)}#ld .ld-b i{display:block;height:100%;background:#a04af8;transform-origin:left;transform:scaleX(0)}
 html.ld-on,html.ld-on body{overflow:hidden}
-#ld{-webkit-mask-image:none!important;mask-image:none!important;transition:opacity .45s ease,visibility 0s .45s!important;overflow:hidden}#ld.out{opacity:0;visibility:hidden;pointer-events:none}#ld .ld-nm{position:absolute;left:0;right:0;bottom:-1.4vw;padding-bottom:1.5vw;text-align:center;font-family:'Inter Tight',sans-serif;font-weight:800;letter-spacing:-.05em;line-height:.8;font-size:14.1vw;white-space:nowrap}#ld .ld-o{color:transparent;-webkit-text-stroke:1px rgba(237,240,242,.3)}#ld .ld-f{position:absolute;left:0;right:0;top:0;color:#edf0f2;clip-path:inset(-10% 100% -30% 0);will-change:clip-path}@media(max-width:760px){#ld .ld-nm{font-size:19vw;line-height:.82;white-space:normal;bottom:-1vw;padding:0 4vw;text-align:left}#ld .ld-f{left:4vw;right:4vw}}
+#ld{-webkit-mask-image:none!important;mask-image:none!important;overflow:visible;transition:transform .9s cubic-bezier(.76,0,.24,1),visibility 0s .9s!important}#ld{background:#141416!important}#ld::after{content:'';position:absolute;left:-15%;right:-15%;top:99%;height:14vh;background:#141416;box-shadow:0 3px 0 rgba(160,74,248,.85),0 18px 40px rgba(160,74,248,.18);border-radius:0 0 50% 50%/0 0 100% 100%}html.ld-on #count{visibility:hidden}#ld.out{opacity:1;transform:translateY(-118%);visibility:hidden;pointer-events:none}#ld .ld-s{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;gap:.26em;align-items:baseline;font-family:'Inter Tight',sans-serif;font-weight:800;letter-spacing:-.04em;line-height:1.1;font-size:clamp(28px,7.6vw,92px);white-space:nowrap;transition:opacity .3s,transform .5s cubic-bezier(.76,0,.24,1)}#ld.out .ld-s{transform:translate(-50%,-90%);opacity:0}#ld .ld-w{display:inline-block;overflow:hidden;min-width:5.3em;padding-bottom:.12em;margin-bottom:-.12em;text-align:left}#ld .ld-w b{display:inline-block;font-weight:800}#ld .ld-w b.in{animation:ldw .26s cubic-bezier(.22,1,.36,1) both}#ld .ld-w i{font-style:normal;color:#a04af8}@keyframes ldw{from{transform:translateY(105%)}to{transform:none}}@media(prefers-reduced-motion:reduce){#ld,#ld .ld-s{transition:opacity .3s,visibility 0s .3s!important}#ld.out{transform:none;opacity:0}#ld .ld-w b.in{animation:none}}
 @property --r{syntax:"<length>";inherits:true;initial-value:0px}
 :root{
   color-scheme:dark;--bg:#0a0a0a;--fg:#edf0f2;--acc:#a04af8;
@@ -557,7 +557,7 @@ input[aria-invalid=true],textarea[aria-invalid=true]{border-color:#ff7d7d!import
 </style>
 
 
-<div id="ld" role="status" aria-label="Seite lädt"><div class="ld-nm" aria-hidden="true"><span class="ld-o">Marc Westhoff</span><span class="ld-f" id="ld-f">Marc Westhoff</span></div><span id="ld-nn" hidden></span><i id="ld-b" hidden></i></div>
+<div id="ld" role="status" aria-label="Seite lädt"><div class="ld-s" aria-hidden="true"><span id="ld-a">Marc mag</span> <span class="ld-w"><b id="ld-w">Marken</b></span></div><span id="ld-nn" hidden></span><i id="ld-b" hidden></i></div>
 <script>
 try{history.scrollRestoration='manual'}catch(e){}try{scrollTo(0,0)}catch(e){}addEventListener('load',()=>{try{scrollTo(0,0)}catch(e){}});addEventListener('pageshow',()=>{try{scrollTo(0,0)}catch(e){}});document.documentElement.classList.add('ld-on');window.__hold=true</script>
 <header class="top">
@@ -1935,8 +1935,10 @@ imgs.forEach(([u,w])=>{W(w);tasks.push(new Promise(r=>{const i=new Image();i.onl
 vids.forEach(v=>{const w=W(4);tasks.push(new Promise(r=>{let ok=false;const g=()=>{if(ok)return;ok=true;fin(w);r()};v.preload='auto';v.addEventListener('canplaythrough',g,{once:true});v.addEventListener('loadeddata',()=>setTimeout(g,2500),{once:true});v.addEventListener('error',g,{once:true});setTimeout(g,9000);try{v.load()}catch(e){g()}}))});
 const fw=W(3);tasks.push((document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve()).then(()=>fin(fw)));
 let shown=0,fired=false,benched=false,fr=[],lastF=0;
-const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;const lf=document.getElementById('ld-f');
-const drawLd=p=>{if(lf)lf.style.clipPath='inset(-10% '+(100-p*100).toFixed(1)+'% -30% 0)'};
+const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const LW=(l=>l==='en'?['Marc likes',['brands','people','moments','courage','marketing']]:l==='es'?['A Marc le va',['la marca','la gente','el momento','el valor','el marketing']]:['Marc mag',['Marken','Menschen','Momente','Mut','Marketing']])(document.documentElement.lang||'de');
+const lwA=document.getElementById('ld-a'),lwW=document.getElementById('ld-w');let lwI=0,lwT=performance.now(),lwEnd=0;if(lwA)lwA.textContent=LW[0];if(lwW)lwW.textContent=LW[1][0];
+const drawLd=p=>{const want=Math.min(4,Math.floor(p*5)),now=performance.now();if(want>lwI&&now-lwT>=250){lwI++;lwT=now;if(lwW){lwW.classList.remove('in');void lwW.offsetWidth;if(lwI===4){lwW.innerHTML=LW[1][4]+'<i>.</i>';lwEnd=now}else lwW.textContent=LW[1][lwI];lwW.classList.add('in')}}};
 const bench=()=>{try{const cv=document.createElement('canvas');cv.width=800;cv.height=500;const x=cv.getContext('2d');const run=()=>{const t=performance.now();for(let k=0;k<5;k++){x.clearRect(0,0,800,500);x.beginPath();for(let i=0;i<4000;i++){const a=(i*37%800),b=(i*91%500);x.moveTo(a+3,b);x.arc(a,b,3,0,6.283)}x.fillStyle='#fff';x.fill()}x.getImageData(0,0,1,1);return performance.now()-t};run();const m=Math.min(run(),run());
   const weak=(navigator.deviceMemory&&navigator.deviceMemory<=2);
   if(m>40||weak)window.__lite=true;window.__bench=m}catch(e){}};
@@ -1957,8 +1959,9 @@ const tick=()=>{
   if(shown>=90&&started&&!warmDone&&el>MAX)warmDone=true;
   requestAnimationFrame(tick)};
 const finish=()=>{
-  setTimeout(idleLoad,2500);try{scrollTo(0,0)}catch(e){}start();drawLd(1);
-  setTimeout(()=>{try{scrollTo(0,0)}catch(e){}window.__hold=false;(window.__hq||[]).splice(0).forEach(f=>f());document.querySelectorAll('.hero-name .ch').forEach(c=>{c.style.transition='none';c.style.transform='none'});if(window.__intro)window.__intro();ld.classList.add('out');document.documentElement.classList.remove('ld-on');setTimeout(()=>ld.remove(),800)},320)};
+  setTimeout(idleLoad,2500);try{scrollTo(0,0)}catch(e){}start();
+  const open=()=>{try{scrollTo(0,0)}catch(e){}window.__hold=false;(window.__hq||[]).splice(0).forEach(f=>f());ld.classList.add('out');document.documentElement.classList.remove('ld-on');if(window.__intro)window.__intro();setTimeout(()=>ld.remove(),1200)};
+  (function w(){drawLd(1);if(lwI>=4&&performance.now()-lwEnd>=620){open();return}requestAnimationFrame(w)})()};
 requestAnimationFrame(tick);
 })();
 </script>
