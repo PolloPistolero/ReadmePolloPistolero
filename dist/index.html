@@ -299,6 +299,7 @@ footer a:hover{color:var(--fg)}
   .pstage{--sh:min(600px,calc(100svh - 150px))}
   .pcard,.ptile{transform:translateX(var(--dx,0px)) var(--base) var(--t)}
   .pcard{--base:translateX(-50%);left:50%;top:3%;width:88vw;aspect-ratio:16/10}
+  .pcard[data-wide]{aspect-ratio:var(--ar)}
   .pcard.s0{--t:perspective(900px) rotateY(-5deg) rotateX(4deg) rotate(-1.5deg)}
   .pcard.sp{--t:translate(-97%,10%) rotate(-13deg) scale(.82)}
   .pcard.sn{--t:translate(97%,-6%) rotate(11deg) scale(.82)}
@@ -1116,7 +1117,7 @@ let userMoved=false;hero.addEventListener('pointermove',()=>{userMoved=true},{on
 const PROJ=[
  {k:'barbershop',n:5,w:760,h:427,t:1,de:['Barbershop Produktmarke','Realprojekt','Die Produktmarke eines Barbershops: Strategie, Tonalität, Claim, Content und Videos für den Online-Shop.'],en:['Barbershop product brand','Real project','The product brand of a barbershop: strategy, tone, claim, content and videos for the online shop.']},
  {k:'express',n:5,w:760,h:760,t:1,de:['Orhan’s Barbershop','Realprojekt','Zwei Gewinnspiele, Postings und Videos von Haarschnitten für einen Barbershop.'],en:['Orhan’s Barbershop','Real project','Two giveaways, posts and haircut videos for a barbershop.']},
- {k:'coffee',n:5,w:760,h:674,t:1,de:['Coffeebeans','Pitch','Markenentwurf für eine Rösterei. Der Kunde hat ihn nicht genutzt.'],en:['Coffeebeans','Pitch','Brand concept for a roastery. The client did not use it.']},
+ {k:'coffee',n:5,w:760,h:313,t:1,de:['Coffeebeans','Pitch','Markenentwurf für eine Rösterei. Der Kunde hat ihn nicht genutzt.'],en:['Coffeebeans','Pitch','Brand concept for a roastery. The client did not use it.']},
  {k:'caseflow',n:2,w:760,h:427,t:1,de:['CaseFlow','Eigenes Konzept','Konzept und Markenentwicklung. Grow the flow.'],en:['CaseFlow','Own concept','Concept and brand development. Grow the flow.']},
  {k:'burger',n:6,w:608,h:760,t:1,de:['Beef&Co','Realprojekt','Social Media und Content für einen Burger-Laden.'],en:['Beef&Co','Real project','Social media and content for a burger restaurant.']},
  {k:'doener',n:9,w:760,h:760,t:1,de:['Döner&Co','Realprojekt','Die gesamte Marke aufgebaut: Food-Konzept, Strategie, Corporate Identity und Design. Dazu OOH-Kampagne und Menüboard.'],en:['Döner&Co','Real project','The entire brand built from scratch: food concept, strategy, corporate identity and design. Plus OOH campaign and menu board.']},
@@ -1128,19 +1129,19 @@ PROJ.forEach(p=>{p.es=ESP[p.k]});
 /*ORDER*/{const O=["coffee", "barbershop", "caseflow", "burger", "express", "doener", "mix", "felazio"];PROJ.sort((a,b)=>O.indexOf(a.k)-O.indexOf(b.k))}
 const L=()=>{const l=document.documentElement.lang;return l==='en'||l==='es'?l:'de'};
 const pstage=document.getElementById('pstage');let pi=0;
-const FY={barbershop:.5,express:.5,coffee:.3,caseflow:.5,burger:.5,doener:.5,mix:.5,felazio:.5};
-const AV=k=>(k==='caseflow'||k==='barbershop')?'?v=4':'';
+const FY={barbershop:.5,express:.5,coffee:.5,caseflow:.5,burger:.5,doener:.5,mix:.5,felazio:.5};
+const AV=k=>(k==='caseflow'||k==='barbershop')?'?v=4':(k==='coffee'?'?v=8':'');
 const LOGO={barbershop:'assets/l-barbershop.webp',express:'assets/l-express.webp',coffee:'assets/l-coffee.webp',caseflow:'assets/l-caseflow.webp',burger:'assets/l-burger.webp',doener:'assets/l-doener.webp',mix:'assets/l-mix.webp',felazio:'assets/l-felazio-wappen.webp'};
 const cards=[],tiles=[];
 PROJ.forEach((p,i)=>{
-  const c=document.createElement('div');c.className='pcard';c.style.setProperty('--ar',p.w+'/'+p.h);c.style.setProperty('--arn',(p.w/p.h).toFixed(3));c.dataset.i=i;c.style.setProperty('--fy',(FY[p.k]*100)+'%');
+  const c=document.createElement('div');c.className='pcard';c.style.setProperty('--ar',p.w+'/'+p.h);c.style.setProperty('--arn',(p.w/p.h).toFixed(3));c.dataset.i=i;if(p.w/p.h>2)c.dataset.wide='1';c.style.setProperty('--fy',(FY[p.k]*100)+'%');
   c.setAttribute('role','button');c.tabIndex=-1;
   c.innerHTML='<img class="st" src="assets/d-'+p.k+'.webp'+(AV(p.k)||'?v=7')+'" alt="" draggable="false"><canvas></canvas><span class="lens"></span>';
   pstage.appendChild(c);cards.push(c);
   const t=document.createElement('div');t.className='ptile';t.innerHTML='<img class="lg" src="'+LOGO[p.k]+'" alt="" draggable="false">';pstage.appendChild(t);tiles.push(t);
 });
 /* Rubbel-Reveal pro Karte */
-const reals=PROJ.map(p=>{const im=new Image();im.src='assets/k-'+p.k+'.jpg?v=7';return im});
+const reals=PROJ.map(p=>{const im=new Image();im.src='assets/k-'+p.k+'.jpg'+(AV(p.k)||'?v=7');return im});
 const RV=cards.map((c,i)=>{
   const cv=c.querySelector('canvas'),cx=cv.getContext('2d'),m=document.createElement('canvas'),mx=m.getContext('2d');
   const o={c,cv,cx,m,mx,w:0,h:0,K:1,last:null,down:false,lastUp:0,running:false,touch:false,idle:true};
@@ -1430,7 +1431,7 @@ $('pp-b').onclick=()=>ppClose();$('pp-a').onclick=()=>ppClose();
 const ppCur=()=>PROJ.findIndex(q=>q.k===ppKey);
 function ppNbr(){const N=PROJ.length,c=ppCur(),n=(c+1)%N,pv=(c-1+N)%N,l=L();
   $('pp-nt').textContent=PROJ[n][l]?PROJ[n][l][0]:PROJ[n].de[0];$('pp-nn').textContent=String(n+1).padStart(2,'0')+' / '+String(N).padStart(2,'0');
-  $('pp-pt').textContent=PROJ[pv][l]?PROJ[pv][l][0]:PROJ[pv].de[0];$('pp-ni').src='assets/c-'+PROJ[n].k+'.jpg'+AV(PROJ[n].k);$('pp-nd').src='assets/d-'+PROJ[n].k+'.webp'+((PROJ[n].k==='caseflow'||PROJ[n].k==='barbershop')?'?v=4':'?v=7')}
+  $('pp-pt').textContent=PROJ[pv][l]?PROJ[pv][l][0]:PROJ[pv].de[0];$('pp-ni').src='assets/c-'+PROJ[n].k+'.jpg'+AV(PROJ[n].k);$('pp-nd').src='assets/d-'+PROJ[n].k+'.webp'+(AV(PROJ[n].k)||'?v=7')}
 function ppTo(n){ppClose();setTimeout(()=>{scrollTo({top:pinTop()+(pinFree?0:n*pinStep())+2,behavior:'instant'});setIdx(n)},0)}
 $('pp-n').addEventListener('pointermove',e=>{const r=e.currentTarget.getBoundingClientRect();e.currentTarget.style.setProperty('--mx',(e.clientX-r.left)+'px');e.currentTarget.style.setProperty('--my',(e.clientY-r.top)+'px')});
 $('pp-n').onclick=()=>ppTo((ppCur()+1)%PROJ.length);$('pp-p').onclick=()=>ppTo((ppCur()-1+PROJ.length)%PROJ.length);
@@ -1923,7 +1924,7 @@ let started=false,warmDone=false;const start=()=>{if(started)return;started=true
 const t0=performance.now(),MIN=2300,MAX=5500;const slowNet=(c=>!!(c&&(c.saveData||/^(slow-2g|2g|3g)$/.test(c.effectiveType||'')||(c.downlink&&c.downlink<1.2))))(navigator.connection);if(slowNet)window.__lite=true;
 const A='assets/',P=['barbershop','express','coffee','caseflow','burger','doener','mix','felazio'];
 const imgs=[[A+'person.webp',8]],late=[];if(!slowNet){
-P.forEach(k=>{const vq=(k==='caseflow'||k==='barbershop'||k==='express')?'?v=4':'';imgs.push([A+'d-'+k+'.webp'+((k==='caseflow'||k==='barbershop')?'?v=4':'?v=7'),2],[A+'c-'+k+'.jpg'+vq,2],[A+'l-'+k+(k==='felazio'?'-wappen':'')+'.webp',1])});
+P.forEach(k=>{const vq=(k==='caseflow'||k==='barbershop'||k==='express')?'?v=4':'';imgs.push([A+'d-'+k+'.webp'+(k==='coffee'?'?v=8':((k==='caseflow'||k==='barbershop')?'?v=4':'?v=7')),2],[A+'c-'+k+'.jpg'+vq,2],[A+'l-'+k+(k==='felazio'?'-wappen':'')+'.webp',1])});
 ['huhn-0','kanne-0','stift-0','blitz-0','huhn','espresso','stift','blitz','snoopy'].forEach(k=>late.push(A+'tat-'+k+'.webp'));
 ['cf-midnight','cf-dustfire','cf-terra','cf-kreislauf','cf-header','cf-logo'].forEach(k=>late.push(A+k+'.jpg'));late.push(A+'cf-wortmarke.webp',A+'g-caseflow-0.jpg');}
 const vids=[];const idleLoad=()=>{if(slowNet)return;const go=()=>{late.forEach(u=>{const i=new Image();i.src=u});document.querySelectorAll('video.hv').forEach(v=>{v.preload='auto';try{v.load()}catch(e){}})};(window.requestIdleCallback||(f=>setTimeout(f,1200)))(go,{timeout:4000})};
