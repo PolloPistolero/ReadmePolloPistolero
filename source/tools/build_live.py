@@ -15,7 +15,9 @@ head = f'''<!doctype html>
 <title>{title}</title>
 <meta name="description" content="{desc}">
 <link rel="canonical" href="{DOMAIN}/">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta property="og:type" content="website"><meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}"><meta property="og:url" content="{DOMAIN}/">
 <meta property="og:image" content="{DOMAIN}/og.png"><meta name="twitter:card" content="summary_large_image">
@@ -30,7 +32,7 @@ D.mkdir()
 (D / 'index.html').write_text(head + body + '\n</body></html>')
 shutil.copytree(R / 'public' / 'assets', D / 'assets')
 shutil.copytree(R / 'public' / 'fonts', D / 'fonts')
-for f in ['favicon.svg', 'og.png']:
+for f in ['favicon.ico', 'favicon-32.png', 'apple-touch-icon.png', 'icon-512.png', 'og.png']:
     p = R / 'live' / f
     if p.exists(): shutil.copy(p, D / f)
 (D / 'robots.txt').write_text(f'User-agent: *\nAllow: /\nSitemap: {DOMAIN}/sitemap.xml\n')
